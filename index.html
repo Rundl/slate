@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
 
+    <link href="images/favicon.ico" rel="icon" type="image/ico" />
+
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -201,7 +203,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,9 +214,6 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -222,22 +221,122 @@
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#welcome" class="toc-h1 toc-link" data-title="Welcome">Welcome</a>
+          </li>
+          <li>
+            <a href="#basics" class="toc-h1 toc-link" data-title="Basics">Basics</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#rest-api" class="toc-h2 toc-link" data-title="REST API">REST API</a>
+                  </li>
+                  <li>
+                    <a href="#event-subscriptions" class="toc-h2 toc-link" data-title="Event subscriptions">Event subscriptions</a>
+                  </li>
+                  <li>
+                    <a href="#environments" class="toc-h2 toc-link" data-title="Environments">Environments</a>
+                  </li>
+                  <li>
+                    <a href="#authorisation-and-security" class="toc-h2 toc-link" data-title="Authorisation and security">Authorisation and security</a>
+                  </li>
+                  <li>
+                    <a href="#versioning" class="toc-h2 toc-link" data-title="Versioning">Versioning</a>
+                  </li>
+                  <li>
+                    <a href="#requests" class="toc-h2 toc-link" data-title="Requests">Requests</a>
+                  </li>
+                  <li>
+                    <a href="#accounts" class="toc-h2 toc-link" data-title="Accounts">Accounts</a>
+                  </li>
+                  <li>
+                    <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate limits">Rate limits</a>
+                  </li>
+                  <li>
+                    <a href="#pagination" class="toc-h2 toc-link" data-title="Pagination">Pagination</a>
+                  </li>
+                  <li>
+                    <a href="#expanding-objects" class="toc-h2 toc-link" data-title="Expanding objects">Expanding objects</a>
+                  </li>
+                  <li>
+                    <a href="#data-types" class="toc-h2 toc-link" data-title="Data types">Data types</a>
+                  </li>
+                  <li>
+                    <a href="#errors" class="toc-h2 toc-link" data-title="Errors">Errors</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#application-authentication-flow-with-oauth" class="toc-h2 toc-link" data-title="Application authentication flow with OAuth">Application authentication flow with OAuth</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#user-authentication-flow-with-oauth" class="toc-h2 toc-link" data-title="User authentication flow with OAuth">User authentication flow with OAuth</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#user-authentication-flow-with-jwt" class="toc-h2 toc-link" data-title="User authentication flow with JWT">User authentication flow with JWT</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#the-order-object" class="toc-h2 toc-link" data-title="The order object">The order object</a>
+                  </li>
+                  <li>
+                    <a href="#order-a-service" class="toc-h2 toc-link" data-title="Order a service">Order a service</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#files" class="toc-h1 toc-link" data-title="Files">Files</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#the-upload_session-object" class="toc-h2 toc-link" data-title="The upload_session object">The upload_session object</a>
+                  </li>
+                  <li>
+                    <a href="#create-an-upload_session" class="toc-h2 toc-link" data-title="Create an upload_session">Create an upload_session</a>
+                  </li>
+                  <li>
+                    <a href="#update-an-upload_session" class="toc-h2 toc-link" data-title="Update an upload_session">Update an upload_session</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#rundls" class="toc-h1 toc-link" data-title="Rundls">Rundls</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#the-rundl-object" class="toc-h2 toc-link" data-title="The rundl object">The rundl object</a>
+                  </li>
+                  <li>
+                    <a href="#start-a-rundl" class="toc-h2 toc-link" data-title="Start a rundl">Start a rundl</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#rundl-participants" class="toc-h1 toc-link" data-title="Rundl participants">Rundl participants</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#the-participant-object" class="toc-h2 toc-link" data-title="The participant object">The participant object</a>
+                  </li>
+                  <li>
+                    <a href="#add-a-rundl-participant" class="toc-h2 toc-link" data-title="Add a rundl participant">Add a rundl participant</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-rundl-participant" class="toc-h2 toc-link" data-title="Update a rundl participant">Update a rundl participant</a>
                   </li>
               </ul>
           </li>
@@ -246,88 +345,222 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='mailto:support@rundl.com'>Register your application</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id='welcome'>Welcome</h1>
+<p>Welcome to the Rundl API! </p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>With the Rundl API you can connect with the ecosystem of people, companies, services and data around you business. Create a collaborative community of your teams, customers and partners and bridge the traditional boundaries that constrain how you do business. Find out more about our unique process collaboration model <a href="https://rundl.com">here</a>.</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>At Rundl we build our client apps on the same public API that we document here. That means we&#39;re committed to improving this API and making it feature rich, clean and consistent. </p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><strong>The Rundl API is currently in Beta</strong>. That means our API is a work in progress. First, product features are being added regularly. Also, patterns and techniques used in our API have evolved over a number of years, but are not yet evenly rolled out across all endpoints. We&#39;re working as fast as we can to complete a stable version. </p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>So we hope you&#39;ll get onboard and leverage the Rundl API to make your business processes open and collaborative. Please get in touch via <a href="mailto:support@rundl.com">support@rundl.com</a> if you have questions or need help.</p>
+<h1 id='basics'>Basics</h1><h2 id='rest-api'>REST API</h2>
+<p>The Rundl API has a RESTful interface, providing programmatic access to most of the data available in the system. It provides URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.</p>
+<h2 id='event-subscriptions'>Event subscriptions</h2>
+<p>Rundl is currently developing an event callback solution that enables your application to be called when an event of interest occurs.</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>The solution is based on the concept of configuring targets for events. An <a href="https://aws.amazon.com/sns/">AWS SNS topic</a> is the first target we&#39;re implementing. </p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>We envisage a range of different targets in future, including a HTTP end-point. </p>
+<h2 id='environments'>Environments</h2>
+<p>The API can be accessed from our test and live environments:</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p><code>https://test-go.rundl.com/api</code></p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<p><code>https://go.rundl.com/api</code></p>
+
+<p>Initially we&#39;ll give you access to our test environment to start your integration with Rundl. Upon request, we&#39;ll supply an integration key/secret for your application in our test environment. </p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+As you'll first need access to our test environment, this documentation uses https://test-go.rundl.com in the examples. After you've developed you app or integration, we'll need to review and approve it before distributing a client secret that will allow you to make requests in our live environment, https://go.rundl.com.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='authorisation-and-security'>Authorisation and security</h2>
+<p>You can authorise against the API using an OAuth2 access token. OAuth2 tokens are acquired programmatically and issuing tokens requires authentication. <a href="#authentication">Read more</a> about Authentication below.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Tokens are used to determine whether the appropriate authorisation has been achieved to access a requested resource. For access to user data, you&#39;re app will need to acquire a user access token. In server-to-server scenarios, your app can pass a client access token (note that not all data can be accessed with a client access token).</p>
+<h2 id='versioning'>Versioning</h2>
+<p>The Rundl API doesn&#39;t currently implement versioning. We plan to implement a date-based version strategy in future that will slot in seamlessly.</p>
+<h2 id='requests'>Requests</h2>
+<p>Rundl is an SSL-only API. </p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>CORS requests are supported.</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<p>UTF-8 character encoding is supported in requests and responses.</p>
+
+<p>The content type being passed to the API for all requests is application/json. Supply the following header with your requests: <code>Content-Type: application/json</code></p>
+<h2 id='accounts'>Accounts</h2>
+<p>Understanding Rundl accounts is an important part of using the API. </p>
+
+<p>A user may have multiple account scopes in a single session on Rundl. For example, a user will always have their personal account, and additionally, may be part of a group account (typically, a group account for their company). Therefore, most APIs on Rundl require passing an account parameter. This parameter reflects the user&#39;s current account, which is the account scope to use when making a request. Importantly, a user&#39;s authorisations will most likely differ depending on their account.</p>
+<h2 id='rate-limits'>Rate limits</h2>
+<p>Rundl does not currently apply rate limiting. We do log all API requests and monitor usage to ensure that we have sufficient resources to support the needs of all Rundl integrated client applications.</p>
+<h2 id='pagination'>Pagination</h2>
+<blockquote>
+<p>To specify the number of items in a list, use the count query parameter:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl https://test-go.rundl.com/api/activity?account<span class="o">=</span>123456&amp;count<span class="o">=</span>12 <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span>
+</code></pre>
+<p>In the Rundl API you&#39;ll come across list endpoints, like lists of activity, rundls, services or reminders. </p>
+
+<p>By default most list endpoints return a maximum of 100 items per page. However, you can specify the number of items in the response by passing a <code>count</code> parameter in the request URL (but you can&#39;t exceed 100 items per page).</p>
+
+<blockquote>
+<p>The above request returns a paging object as part of the response (example json truncated for brevity):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">test-go.rundl.com</span><span class="se">\/</span><span class="s2">api</span><span class="se">\/</span><span class="s2">activity?account=123456&amp;cursor=9a0c1d45d46"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"previous"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">test-go.rundl.com</span><span class="se">\/</span><span class="s2">api</span><span class="se">\/</span><span class="s2">activity?account=123456&amp;cursor=f5d8f4e51aa"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"strategy"</span><span class="p">:</span><span class="mi">2</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When the response has more items than the initial page, you can paginate through the results. </p>
+
+<p>Some list endpoints have outdated limiting parameters, and we&#39;ll document these where relevant. However the Rundl API now offers pagination via the concept of cursors. These are special tokens that function as markers in a series. If a list endpoint supports cursor-based pagination you&#39;ll receive and extra object as part of the response, called <code>paging</code>.</p>
+
+<p>To move forwards or backwards through the pages send the <code>next</code> or <code>previous</code> cursor to the endpoint.</p>
+
+<p>Some lists can be ordered by specifying a <code>sort</code> parameter to the end point. Check the documentation for a specific endpoint to tell if it can be ordered. Some endpoints have outdated sorting parameters, and we&#39;ll document these where relevant.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>count</code></td>
+<td><strong>Optional.</strong> The number of items to return per page. Defaults number of items is 10. -1 means all. Maximum number of items is usually 100.</td>
+</tr>
+<tr>
+<td><code>cursor</code></td>
+<td>Pointer to the next or previous page in the result set.</td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>Comma separated array of strings e.g. sort=-updated_date. Names need to be top-level atomic resource attributes. Plus (+) means ascending and is the default. Minus (-) means descending. Sorting is best effort and if something is not found it&#39;s ignored. <em>Note: Requires URL encoding.</em></td>
+</tr>
+</tbody></table>
+<h2 id='expanding-objects'>Expanding objects</h2>
+<blockquote>
+<p>To retrieve related objects as part of a single request, use the expand query parameter:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl https://test-go.rundl.com/api/messages/23420341?account<span class="o">=</span>123456&amp;context_mode<span class="o">=</span>insensitive&amp;expand<span class="o">=</span>comments%2Clinks%2Cfiles%2Creminders <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span>
+</code></pre>
+<blockquote>
+<p>The above request returns an expanded message object as part of the response (example json truncated for brevity):</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">23420341</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"message"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"comments"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">23420441</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"comment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message_id"</span><span class="p">:</span><span class="mi">23420341</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"metadata"</span><span class="p">:{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"text"</span><span class="p">:</span><span class="s2">"Hi, This is a comment. Thanks"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"distribution_mode"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"files"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
+       </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"links"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:[</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"metadata"</span><span class="p">:{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"pin"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"primary_related_entity"</span><span class="p">:{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"reminders"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"text"</span><span class="p">:</span><span class="s2">"Hi, This is a message. Thanks"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Expanding objects allows you to retrieve related objects as part of a single request. </p>
+
+<p>For example, a message object has related comments, reminders, files and links. These related objects can be retrieved independently via separate requests. However, you can get a message&#39;s comments, reminders, files and links along with the message by passing a comma-separated string of related objects in the expand parameter: <code>expand=comments%2Clinks%2Cfiles%2Creminders</code></p>
+<h2 id='data-types'>Data types</h2><h3 id='time-stamps'>Time stamps</h3>
+<p>Time stamps are presented in UTC time.
+TODO: Current formats are mixed. In future, all timestamps will be formatted as ISO 8601 strings. For example: <code>2016-04-23T18:25:43.511Z</code></p>
+<h2 id='errors'>Errors</h2>
+<p>The API policy is to return a relevant HTTP Error code with an error description.</p>
+<h1 id='authentication'>Authentication</h1>
+<p>Each request to the Rundl API must be authenticated. When you register your application we&#39;ll assign it OAuth credentials and send them to you.</p>
+
+<p>Rundl uses OAuth to provide authorised access to resources via its API. OAuth has a number of benefits:</p>
+
+<ul>
+<li>Users are not required to share their passwords with third party applications.</li>
+<li>Standard libraries available in most application frameworks.</li>
+</ul>
+<h2 id='application-authentication-flow-with-oauth'>Application authentication flow with OAuth</h2>
+<p>A client application can directly request an access token from the Authorization server by using the client&#39;s id and secret to authenticate. The token will represent the client application (instead of a user). Our implementation is modelled on the <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials Grant</a> flow in the OAuth 2 spec.</p>
+
+<p>This flow is useful in the following cases:</p>
+
+<ul>
+<li>Machine-to-machine calls without the intervention of a user</li>
+<li>Non-user-centric API calls</li>
+</ul>
+<h3 id='step-1-get-client-access-token'>Step 1: Get client access token</h3><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/client_tokens <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --data <span class="s1">'
+    {
+      "grant_type":"client_credentials",
+      "scope":"private",
+      "client_id":1234,
+      "client_secret":"&lt;Client-Secret&gt;"
+    }
+  '</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yUwDyJ7x3gn8s...ZSihtsApgy6bnZI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-09-07T05:39:51.4699703Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p>Request a client access token using the client secret provided to you by Rundl when registering your application.</p>
+
+<p><code>POST   /oauth/client_tokens</code></p>
+
+<p><strong>Body parameters</strong></p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -336,91 +569,862 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td><code>grant_type</code></td>
+<td><strong>Required.</strong> Available grants: <code>client_credentials</code></td>
+<td></td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>scope</code></td>
+<td>Options: <code>private</code> (default) Authorised access to secure private resources.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>client_id</code></td>
+<td><strong>Required.</strong> The application&#39;s client id, provided during application registration.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>client_secret</code></td>
+<td><strong>Required.</strong> The application&#39;s client secret, provided during application registration.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>refresh_token</code></td>
+<td><strong>Not implemented.</strong></td>
+<td></td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<p><strong>Error codes</strong></p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>480</td>
+<td>Unauthorized - Invalid Client Key/Secret</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request - Missing or unsupported parameters</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>To get a client access token, passing the credentials in the header:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/client_tokens <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Basic &lt;Base64-Encoded-ClientId-Colon-ClientSecret&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+    {
+      "grant_type":"client_credentials",
+      "scope":"private"
+    }
+  '</span>
+</code></pre>
+<aside class="notice">
+Instead of passing the client_id and client_secret values as query parameters in the post body, you may also pass them as a base64 URL encoded string in the Authorization header. To do this, base64 encode the url encoded client_id and client_secret together, with a colon separating them: aBase64EncodeFunction(clientidvalue:clientsecret). In this case the client_id and client_secret are not required as body parameters.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id='step-2-use-the-client-access-token'>Step 2: Use the client access token</h3>
+<p>Your application is now authorised to make calls to the Rundl API, to access protected resources on behalf of your application itself, by passing the access token in the Authorization header.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><code>Authorization: OAuth &lt;base64 encoded client access token&gt;</code></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>The available REST API resources are documented in this API reference. We also plan to document a number of walkthroughs that explain how to peform common tasks using the API.</p>
+<h2 id='user-authentication-flow-with-oauth'>User authentication flow with OAuth</h2>
+<p>A client application can get permission from a user to access protected resources on their behalf. The applications passes control to Rundl, we let the user log in to their chosen account, and pass back control to your application together with an assertion token. The token is linked to the user and your client id and can be exchanged for a user access token.</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<p>This is a standard flow in many web applications. By delegating authentication to Rundl your application doesn&#39;t have to handle usernames and passwords.</p>
+
+<p>Our implementation is modelled on the <a href="https://tools.ietf.org/html/rfc6749#section-4.1">Authorisation Code Grant</a> flow in the OAuth 2 spec. </p>
+
+<p>This is useful in the following cases:</p>
+
+<ul>
+<li>User grants access to the client application to access its protected data.</li>
+<li>Client application makes calls to the Rundl API on behalf of the authorised user.</li>
+</ul>
+
+<p>Every time your application makes an API call it will be issued on behalf of the user. If the user doesn&#39;t have permissions to access the requested resource the call will be blocked.</p>
+<h3 id='step-1-redirect-users-to-the-rundl-authorisation-page'>Step 1: Redirect users to the Rundl authorisation page</h3>
+<p>Send your users to the Rundl authorisation page. </p>
+
+<p><code>https://test-go.rundl.com/oauth/authorize</code></p>
+
+<p>Pass the following query parameters:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>response_type</code></td>
+<td>Options: <code>code</code> (default) Authorization code grant flow is the only user authorised grant type currently supported.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>client_id</code></td>
+<td>The client id you received from Rundl when registering your application.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>redirect_uri</code></td>
+<td>The URI in your application where users get sent after a user decides to log in to your application. If not supplied, user will be redirected to https://test-go.rundl.com/dashboard.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td><strong>Not implemented.</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><strong>Not implemented.</strong></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>The page asks the user to log in, before they are redirected back to your application.</p>
+
+<aside class="notice">
+Currently Rundl's OAuth implementation supports a user implicitly granting your application access to the protected resources on their behalf, via the act of logging in. In future Rundl will support explicit re-delegation of access rights to a protected resource. The user will explicitly grant access to the requested types of protected resources (scopes).
+</aside>
+<h3 id='step-2-handle-authorisation-response'>Step 2: Handle authorisation response</h3>
+<p>Rundl will return the user to your specified <code>redirect_uri</code> with the authorisation code as a parameter.</p>
+
+<p><code>https://example.com/your_redirect_uri?code=&lt;Auth-Code&gt;</code></p>
+
+<p>Handle the following query parameters:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>code</code></td>
+<td>The short lived authorisation code.</td>
+</tr>
+<tr>
+<td><code>redirect_uri</code></td>
+<td><strong>Not implemented.</strong> Included for verification.</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><strong>Not implemented.</strong> Included for verification.</td>
+</tr>
+<tr>
+<td><code>stay_signed_in</code></td>
+<td>Optional parameter passing through the intent of the user for the session length. Support for this will be dropped once refresh token support is added. Your app will be able to implement its own session length strategy.</td>
+</tr>
+</tbody></table>
+<h3 id='step-3-get-user-access-token-from-rundl'>Step 3: Get user access token from Rundl</h3><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
+  --data <span class="s1">'
+    {
+      "grant_type":"authorization_code",
+      "client_id":286454,
+      "client_secret":"&lt;Client-Secret&gt;",
+      "scope":"private",
+      "code":"&lt;Auth-Code&gt;"
+    }
+  '</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yUwDyJ7x3gn8s...ZSihtsApgy6bnZI"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-02-07T05:39:51.4699703Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"private"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Exchange the authorisation code for a user access token.</p>
+
+<p><code>POST   /oauth/access_tokens</code></p>
+
+<p><strong>Body parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>grant_type</code></td>
+<td><strong>Required.</strong> Options: <code>authorization_code</code></td>
+</tr>
+<tr>
+<td><code>client_id</code></td>
+<td><strong>Required - unless passed in the Authorization header.</strong> The application&#39;s client id, provided during application registration.</td>
+</tr>
+<tr>
+<td><code>client_secret</code></td>
+<td><strong>Required - unless passed in the Authorization header.</strong> The application&#39;s client secret, provided during application registration.</td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td>The authorization code returned from Rundl when the user authorises your application to access Rundl on their behalf.</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>Options: <code>private</code> (default) authorised access to secure private resources, <code>public</code> some resources are available for anonymous access via a public access token</td>
+</tr>
+<tr>
+<td><code>redirect_uri</code></td>
+<td><strong>Not implemented.</strong></td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><strong>Not implemented.</strong></td>
+</tr>
+<tr>
+<td><code>refresh_token</code></td>
+<td><strong>Not implemented.</strong></td>
+</tr>
+<tr>
+<td><code>stay_logged_in</code></td>
+<td>Optional parameter passing through the intent of the user for the session length. Options: <code>false</code> (default) access token will expire after 8 hours, <code>true</code> access token will expire after 30 days<br/><em>This parameter will be dropped once refresh tokens are implemented.</em></td>
+</tr>
+</tbody></table>
+
+<p><strong>Error codes</strong></p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad request. e.g. User not enabled for login. Grant type not supported.</td>
+</tr>
+<tr>
+<td>480</td>
+<td>Revoked client id</td>
+</tr>
+<tr>
+<td>498</td>
+<td>Token invalid</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>To get a user access token, passing the credentials in the header:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Basic &lt;Base64-Encoded-ClientId-Colon-ClientSecret&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+    {
+      "grant_type":"authorization_code",
+      "scope":"private",
+      "code":"&lt;Auth-Code&gt;"
+    }
+  '</span>
+</code></pre>
+<aside class="notice">
+Instead of passing the client_id and client_secret values as query parameters in the post body, you may also pass them as a base64 URL encoded string in the Authorization header. To do this, base64 encode the url encoded client_id and client_secret together, with a colon separating them: aBase64EncodeFunction(clientidvalue:clientsecret). In this case the client_id and client_secret are not required as body parameters.
+</aside>
+<h3 id='step-4-use-the-access-token'>Step 4: Use the access token</h3>
+<p>Your application is now authorised to make calls to the Rundl API, to access protected resources on behalf of the authenticated user, by passing the access token in the Authorization header.</p>
+
+<p><code>Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;</code></p>
+
+<p>See REST API method reference for information about the the available resources.</p>
+<h2 id='user-authentication-flow-with-jwt'>User authentication flow with JWT</h2>
+<p>Rundl allows third party applications to authenticate users directly with Rundl using a JSON Web Token (JWT) signed with an RSA key. This authentication method is intended for server-to-server applications.</p>
+
+<p>Using the JWT flow has a number of benefits:</p>
+
+<ul>
+<li>Removes the friction of your application&#39;s users logging in to Rundl in addition to your application.</li>
+<li>Reduces the number of steps in the authentication flow. Users are not directed to Rundl to authorise your application to access their data on Rundl</li>
+</ul>
+
+<p>Use the JWT flow in the following cases:</p>
+
+<ul>
+<li>Automatically onboard your application&#39;s users as managed Rundl user accounts.</li>
+<li>Single Sign On (SSO) your application&#39;s users to a Rundl shared web page.</li>
+</ul>
+<h3 id='about-sso'>About SSO</h3>
+<p>When you attempt to authenticate your application&#39;s user for the first time:</p>
+
+<ol>
+<li>A new Rundl user will be created based on the information included in the JWT assertion.</li>
+<li>A user access token is returned.</li>
+</ol>
+
+<p>After the first successful authentication, in subsequent attempts you will simply be returned a user access token.</p>
+
+<p>There are important conceptual differences with the Rundl user created via this flow:</p>
+
+<ul>
+<li>This flow essentially drops the first leg of the standard OAuth authorisation flow: the user isn&#39;t asked to authorize your application to access Rundl on their behalf.</li>
+<li>Your application is the designated identity provider for the an identity associated with the Rundl user.</li>
+<li>Due to the network and parallel process aspect to Rundl, if your application&#39;s user participates in rundls delivered by other service providers, they will get an additional identity from Rundl (or another approved identity provider) to access Rundl. Rundl will facilitate the creation of this separate identity associated with the user.</li>
+<li>The user access token returned is limited in scope to access host data (i.e. rundls) owned by the Rundl account associated with the registered identity provider. It can&#39;t be used to access data owned by other hosts. In future we envisage an approval mechanism to extend trust to other hosts. <em>NOTE: The access token may still be used to access network data not owned by hosts.</em></li>
+</ul>
+<h3 id='step-1-register-your-application-as-an-identity-provider'>Step 1: Register your application as an identity provider</h3>
+<p>In addition to the standard requirements for registering your application, you will need to register to become an identity provider. Contact <a href="mailto:support@rundl.com">support@rundl.com</a>.</p>
+<h3 id='step-2-generate-an-rsa-keypair'>Step 2: Generate an RSA Keypair</h3>
+<blockquote>
+<p>Run the following commands (for example using Cygwin on Windows).</p>
+
+<p>Generate private key:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>openssl genrsa -aes256 -out private_key.pem 2048
+</code></pre>
+<blockquote>
+<p>Generate public key:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>openssl rsa -pubout -in private_key.pem -out public_key.pem
+</code></pre>
+<blockquote>
+<p>If generated properly, the RSA public key should look like this:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0
+FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
+3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQAB
+-----END PUBLIC KEY-----
+</code></pre>
+<p>To sign and authenticate a JWT assertion you need to generate a RSA private-public keypair. You will sign your requests with the private key, which is verified by the public key  you provide to Rundl. Be sure to protect your private key.</p>
+
+<p>We suggest generating the keypair using the <a href="https://www.openssl.org/">OpenSSL</a> tool.</p>
+
+<p>If using other tools, note the following settings:</p>
+
+<table><thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Key length</td>
+<td>2048</td>
+</tr>
+<tr>
+<td>Algorithm</td>
+<td>RS512</td>
+</tr>
+<tr>
+<td>Public key</td>
+<td>Export asn.1 format</td>
+</tr>
+</tbody></table>
+<h3 id='step-3-submit-the-public-key'>Step 3: Submit the Public Key</h3>
+<p>The public key is not a secret so can be emailed or posted to a rundl. This key is required to be verifiably under the control of the party identified as the issuer of the JWT.</p>
+<h3 id='step-4-construct-the-jwt-assertion'>Step 4: Construct the JWT assertion</h3>
+<p>The following table lists libraries that have been used to successfully generate a valid JWT:</p>
+
+<table><thead>
+<tr>
+<th>Language</th>
+<th>Link</th>
+<th>Settings</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Java</td>
+<td>https://github.com/auth0/java-jwt<br/>Relevant sample code:<br/>com.auth0.jwt.JWTRoundTripRsa256Test</td>
+<td><strong>Key length:</strong> 2048 (default)<br/><strong>Algorithm:</strong> options.setAlgorithm(Algorithm.RS512)<br/><strong>Public key:</strong> asn.1 format export.</td>
+</tr>
+<tr>
+<td>C#</td>
+<td>https://www.nuget.org/packages/System.IdentityModel.Tokens.Jwt/</td>
+<td></td>
+</tr>
+<tr>
+<td>PHP</td>
+<td>https://github.com/emarref/jwt</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>It is likely that other libraries from https://jwt.io/ are also compatible.</p>
+
+<p><strong>Header attributes</strong></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>alg</code></td>
+<td>String</td>
+<td><strong>Required.</strong> The algorithm used to verify the signature. &quot;RS512&quot;. 512 represents the SHA-2 hashing algorithm that is used by the digital signature.</td>
+</tr>
+<tr>
+<td><code>typ</code></td>
+<td>String</td>
+<td><strong>Required.</strong> Type of token. Default is “JWT” to specify a JSON Web Token (JWT).</td>
+</tr>
+</tbody></table>
+
+<p><strong>Payload claims</strong></p>
+
+<table><thead>
+<tr>
+<th>Claim</th>
+<th>Type</th>
+<th>Description</th>
+<th>Sample</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>given_name</code></td>
+<td>String</td>
+<td><strong>Required.</strong> The user&#39;s first name.</td>
+<td>&quot;given_name&quot;: &quot;Jerry&quot;</td>
+</tr>
+<tr>
+<td><code>family_name</code></td>
+<td>String</td>
+<td>The user&#39;s surname.</td>
+<td>&quot;family_name&quot;: &quot;Seldon&quot;</td>
+</tr>
+<tr>
+<td><code>mobilephone</code></td>
+<td>String</td>
+<td>The user&#39;s mobile phone number.</td>
+<td>&quot;mobilephone&quot;: &quot;+61477289117&quot;</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>String</td>
+<td><strong>Required.</strong> Email address. Required for notifications.</td>
+<td>&quot;email&quot;: &quot;jseldon@gmail.com&quot;</td>
+</tr>
+<tr>
+<td><code>exp</code></td>
+<td>Number</td>
+<td><strong>Required.</strong>     JWT Expiration Time. UTC timestamp - seconds since UnixEpoch (UTC 1970-01-01T0:0:0Z) - after which the JWT cannot be accepted.</td>
+<td>&quot;exp&quot;: 1475552704</td>
+</tr>
+<tr>
+<td><code>sub</code></td>
+<td>String</td>
+<td><strong>Required.</strong> Subject of the JWT. Locally unique id of the app user in the context of the issuer.</td>
+<td>&quot;sub&quot;: &quot;1234567890&quot;</td>
+</tr>
+<tr>
+<td><code>iss</code></td>
+<td>String</td>
+<td><strong>Required.</strong> The id for the Rundl identity provider registered in step 1. Identifies the principal that issued the JWT.</td>
+<td>&quot;iss&quot;: &quot;1234567890&quot;</td>
+</tr>
+<tr>
+<td><code>iat</code></td>
+<td>Number</td>
+<td><strong>Required.</strong> UTC timestamp - seconds since UnixEpoch (UTC 1970-01-01T0:0:0Z) - when JWT issued. This can determine the age of the JWT.</td>
+<td>&quot;iat&quot;: 1475549104</td>
+</tr>
+<tr>
+<td><code>aud</code></td>
+<td>String</td>
+<td><strong>Required.</strong> Audience (JWT target). Identifies the intended recipients of the JWT.  Always &quot;https://go.rundl.com/api/oauth/access_tokens&quot; for getting OAuth access tokens.</td>
+<td>&quot;aud&quot;: &quot;https://go.rundl.com/api/oauth/access_tokens&quot;</td>
+</tr>
+</tbody></table>
+<h3 id='step-5-get-access-token-from-rundl'>Step 5: Get access token from Rundl</h3>
+<blockquote>
+<p>To get a user access token, passing the JWT in the header:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: JWT &lt;jwt&gt; \
+  --data '</span>
+    <span class="o">{</span>
+      <span class="s2">"grant_type"</span>:<span class="s2">"jwt_bearer"</span>,
+      <span class="s2">"client_id"</span>:<span class="s2">"1234"</span>,
+      <span class="s2">"scope"</span>:<span class="s2">"private"</span>,
+      <span class="s2">"stay_signed_in"</span>:<span class="s2">"true"</span>
+    <span class="o">}</span>
+  <span class="s1">'
+</span></code></pre>
+<p>Your service will authenticate to Rundl by requesting a user access token, passing the JWT in the Authorization header.</p>
+<h3 id='step-6-use-the-access-token'>Step 6: Use the access token</h3>
+<p>Your application is now authorised to make calls to the Rundl API, to access protected resources on behalf of the authenticated user, by passing the access token in the Authorization header.</p>
+
+<p><code>Authorization: OAuth &lt;base64 encoded user access token&gt;</code></p>
+
+<p>See REST API method reference for information about the the available resources.</p>
+
+<p>You can also pass the access token as a URL parameter to one of our responsive shared pages.</p>
+
+<p><code>https://go.rundl.com/auth/session?access_token={&lt;User-Access-Token&gt;}&amp;redirect_url={redirect_url}</code></p>
+<h1 id='orders'>Orders</h1><h2 id='overview'>Overview</h2>
+<p>Take control of acquiring new customers and starting transactional work. Service providers can offer services to their customers and referral partners and track opportunities sent as orders.</p>
+<h2 id='the-order-object'>The order object</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Unique identifier for the order.</td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>integer</td>
+<td>Unique identifier for the service being ordered.</td>
+</tr>
+<tr>
+<td><code>subject</code></td>
+<td>string</td>
+<td>Summary of the order.</td>
+</tr>
+<tr>
+<td><code>detail</code></td>
+<td>string</td>
+<td>Details about the order, such as a message or description.</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td>object</td>
+<td>Sender of the order as a participant_lead object.</td>
+</tr>
+<tr>
+<td><code>participant_leads</code></td>
+<td>list</td>
+<td>List of participant_lead objects</td>
+</tr>
+<tr>
+<td><code>files</code></td>
+<td>list</td>
+<td>List of Rundl file identifiers. Stage files on auth user&#39;s account via the files API prior to sending the order.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>integer</td>
+<td>Status of the order. See approval states reference.</td>
+</tr>
+<tr>
+<td><code>referral_fee</code></td>
+<td>string</td>
+<td>Referral fee currency amount payable to the sender.</td>
+</tr>
+<tr>
+<td><code>referral_fee_currency</code></td>
+<td>string</td>
+<td>Three-letter ISO currency code. Currently only AUD supported.</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>object</td>
+<td>Information about the source of the order.</td>
+</tr>
+<tr>
+<td><code>rundl</code></td>
+<td>object</td>
+<td>Information about the rundl to create when accepting an order.</td>
+</tr>
+<tr>
+<td><code>request_id</code></td>
+<td>integer</td>
+<td>The unique identifier of the related request. Currently orders are coupled with requests. This will soon be deprecated and orders will stand alone.</td>
+</tr>
+<tr>
+<td><code>metadata</code></td>
+<td>object</td>
+<td>Context information related to the order</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='order-a-service'>Order a service</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/orders?account<span class="o">=</span>123456 <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+    {
+      "order": {
+        "service":23225632,
+        "subject":"123 Baker St Caulfield (Demo)",
+        "detail":"Sale of property at 123 Baker St Caulfield Vic 3126 ",
+        "sender":{
+          "context":873900,
+          "roles":["Seller"],
+          "person":{"id":873900}
+        },
+        "participant_leads":[
+          {
+            "person":{
+              "first_name":"Rod",
+              "surname":"Montford",
+              "email":"rmontford@gmail.com",
+              "mobile":"+61412356789"
+            },
+            "roles":["Seller"]
+          }
+        ]
+      }
+    }
+  '</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"detail"</span><span class="p">:</span><span class="s2">"Sale of property at 123 Baker St Caulfield Vic 3126 "</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"files"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">23226946</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"metadata"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"created_context"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">873900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Zoe Montford"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1513314441677+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">873900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Zoe Montford"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">e7392fe26191f428e9a8e8f7d9aee55c"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">23226946</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_context"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">873900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Zoe Montford"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"updated_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1513314441677+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">873900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Zoe Montford"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">e7392fe26191f428e9a8e8f7d9aee55c"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"participant_leads"</span><span class="p">:[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"context"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">23226951</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"person"</span><span class="p">:{</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"rmontford@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Rod"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mobile"</span><span class="p">:</span><span class="s2">"+61 412 356 789"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"Montford"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"roles"</span><span class="p">:[</span><span class="w">
+        </span><span class="s2">"Seller"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"subscribe"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"referral_fee"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"referral_fee_currency"</span><span class="p">:</span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"request_id"</span><span class="p">:</span><span class="mi">23226952</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rundl"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"context"</span><span class="p">:</span><span class="mi">873900</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">23226950</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"person"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"first_name"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">873900</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"mobile"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"surname"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"roles"</span><span class="p">:[</span><span class="w">
+      </span><span class="s2">"Seller"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"subscribe"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"service"</span><span class="p">:</span><span class="mi">23225632</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"source"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"subject"</span><span class="p">:</span><span class="s2">"123 Baker St Caulfield (Demo)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Order a service from a Rundl service provider. The user context sending the order must have permission to order the service. Service settings control which contexts can order.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST   /orders?account={account_id}</code></p>
+<h3 id='query-parameters'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>The id of the selected account when ordering the service</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request body</h3>
+<p>TODO</p>
+
+<aside class="success">Remember — a happy kitten is an authenticated kitten!</aside>
 
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<h1 id='files'>Files</h1><h2 id='overview'>Overview</h2>
+<p>Upload files to Rundl before attaching to other entities within the Rundl API. Rundl uses AWS S3 as it&#39;s file storage backend. </p>
+
+<p>Uploading files is a three-step process:</p>
+
+<ol>
+<li>Create an upload_session. An upload_session contains the required short-lived credentials to access AWS S3.</li>
+<li>Upload the file to AWS S3. Uploading is best done using one of the many AWS SDKs.</li>
+<li>Update the upload_session to complete the upload.</li>
+</ol>
+<h2 id='the-upload_session-object'>The upload_session object</h2>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Attribute</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td><code>aws_access_key</code></td>
+<td>string</td>
+<td>AWS access key used in signing.</td>
+</tr>
+<tr>
+<td><code>aws_bucket</code></td>
+<td>string</td>
+<td>Target AWS bucket name.</td>
+</tr>
+<tr>
+<td><code>aws_region</code></td>
+<td>string</td>
+<td>AWS region.</td>
+</tr>
+<tr>
+<td><code>aws_resource_key</code></td>
+<td>string</td>
+<td>Target AWS resource key.</td>
+</tr>
+<tr>
+<td><code>aws_secret_key</code></td>
+<td>string</td>
+<td>AWS access key used in signing.</td>
+</tr>
+<tr>
+<td><code>aws_session_token</code></td>
+<td>string</td>
+<td>AWS access key used in signing.</td>
+</tr>
+<tr>
+<td><code>content_type</code></td>
+<td>string</td>
+<td>Mime content type for the file to be uploaded.</td>
+</tr>
+<tr>
+<td><code>file</code></td>
+<td>string</td>
+<td>File object for a verified successful upload.</td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>string</td>
+<td>Filename with extension (pathless). Note that content-type is derived from the filename extension.</td>
+</tr>
+<tr>
+<td><code>hash</code></td>
+<td>string</td>
+<td>MD5 file hash.</td>
+</tr>
+<tr>
+<td><code>publish</code></td>
+<td>boolean</td>
+<td>Publish immediately on upload success.</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>integer</td>
+<td>File size in bytes.</td>
+</tr>
+<tr>
+<td><code>upload_token</code></td>
+<td>string</td>
+<td>Server allocated token identifying the upload session.</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<h2 id='create-an-upload_session'>Create an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/files/upload_sessions?account<span class="o">=</span>123456 <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+    {
+      "fileUploadSession": {
+        "filename": logo.png,
+        "size": 15992,
+      }
+    }
+  '</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+  </span><span class="s2">"aws_access_key"</span><span class="p">:</span><span class="s2">"ASIAJAY...WXXTCA"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"aws_bucket"</span><span class="p">:</span><span class="s2">"uploadsrundlco"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"aws_region"</span><span class="p">:</span><span class="s2">"ap-southeast-2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"aws_resource_key"</span><span class="p">:</span><span class="s2">"d419b96c-x111-1111-x11y-7b7706cfdc57"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"aws_secret_key"</span><span class="p">:</span><span class="s2">"584veUApzU...a57z0AFHp"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"aws_session_token"</span><span class="p">:</span><span class="s2">"FQoDYXdzEOj//////////wEaDDp8CIKb1dxGiL2hNyK...rNyAw+vZGSPQbCCyoEHStewo177t0QU="</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"content_type"</span><span class="p">:</span><span class="s2">"image</span><span class="se">\/</span><span class="s2">png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"file"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"filename"</span><span class="p">:</span><span class="s2">"logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hash"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"publish"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"size"</span><span class="p">:</span><span class="mi">15992</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"upload_token"</span><span class="p">:</span><span class="s2">"d419b96c-x111-1111-x11y-7b7706cfdc57"</span><span class="p">,</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<p>Create an upload session prior to uploading a file. The upload session will return the parameters required by AWS S3 when uploading a file.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST   /files/upload_sessions?account={account_id}</code></p>
+<h3 id='query-parameters'>Query parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -428,11 +1432,659 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>account_id</td>
+<td>The id of the selected account when uploading the file</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h2 id='update-an-upload_session'>Update an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://test-go.rundl.com/api/files/upload_sessions/d419b96c-b320-4088-b66a-7b7706cfdc57?account<span class="o">=</span>123456 <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+    {
+      "fileUploadSession": {
+        "aws_access_key":"ASIAJAY...WXXTCA",
+        "aws_bucket":"uploadsdevrundlco",
+        "aws_region":"ap-southeast-2",
+        "aws_resource_key":"d419b96c-x111-1111-x11y-7b7706cfdc57",
+        "aws_secret_key":"584veUApzU...a57z0AFHp",
+        "aws_session_token":"FQoDYXdzEOj//////////wEaDDp8CIKb1dxGiL2hNyK...rNyAw+vZGSPQbCCyoEHStewo177t0QU=",
+        "content_type":"image/png",
+        "file":null,
+        "filename":"logo.png",
+        "publish":false,
+        "size":15992,
+        "upload_token":"d419b96c-x111-1111-x11y-7b7706cfdc57",
+      }
+    }
+  '</span>
+</code></pre><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>PUT    /files/upload_sessions/{upload_token}?account={account_id}</code></p>
+<h3 id='query-parameters-2'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>The id of the selected account when uploading the file</td>
+</tr>
+</tbody></table>
+<h3 id='path-parameters'>Path parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>upload_token</td>
+<td>The token to identify the upload session.</td>
+</tr>
+</tbody></table>
+<h1 id='rundls'>Rundls</h1><h2 id='overview'>Overview</h2>
+<p>A rundl is a shared digital space that brings together people and information around a business transaction.</p>
+<h2 id='the-rundl-object'>The rundl object</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Unique identifier for the rundl.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>The name of the rundl.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>The description of the rundl.</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>string</td>
+<td>The host of the rundl. Gid if start, or entity when get.</td>
+</tr>
+<tr>
+<td><code>files</code></td>
+<td>list</td>
+<td>List of Rundl file identifiers. Stage files on auth user&#39;s account via the files API prior to sending the order.</td>
+</tr>
+<tr>
+<td><code>participant_leads</code></td>
+<td>list</td>
+<td>List of participant_lead objects</td>
+</tr>
+<tr>
+<td><code>related_rundls</code></td>
+<td>list</td>
+<td>List of related rundls</td>
+</tr>
+<tr>
+<td><code>fields</code></td>
+<td>list</td>
+<td>List of fields</td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>integer</td>
+<td>Unique identifier of the type of service for the rundl.</td>
+</tr>
+<tr>
+<td><code>service_name</code></td>
+<td>string</td>
+<td>The name of the service</td>
+</tr>
+<tr>
+<td><code>brand_color</code></td>
+<td>string</td>
+<td>Hexadecimal colour value. If not set on the rundl, inherits from the service.</td>
+</tr>
+<tr>
+<td><code>header_image_url</code></td>
+<td>string</td>
+<td>Url for header image. If not set on the rundl, inherits from the service.</td>
+</tr>
+<tr>
+<td><code>metadata</code></td>
+<td>object</td>
+<td>Context information related to the order</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>integer</td>
+<td>Status of the order. See states reference.</td>
+</tr>
+<tr>
+<td><code>state_metadata</code></td>
+<td>object</td>
+<td>Status of the order. See approval states reference.</td>
+</tr>
+<tr>
+<td><code>last_actioned_step</code></td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td><code>last_actioned_step_state</code></td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td><code>last_actioned_step_state_metadata</code></td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td><code>percentage_complete</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='start-a-rundl'>Start a rundl</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account<span class="o">=</span>123456 <span class="se">\ </span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+      {
+      "rundl":{
+        "name":"Sale of property at 123 Baker St Caulfield Vic 3126",
+        "description":"Sale of property at 123 Baker St Caulfield Vic 3126",
+        "host":{
+          "id":2237816
+        },
+        "participant_leads":[
+          {
+            "context":1688402,
+            "roles":[
+              "Real Estate Agent"
+            ]
+          }
+        ],
+        "files":[
+          24415295
+        ]
+      }
+    }
+  '</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"actions"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415298</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"rundl"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"add_ons"</span><span class="p">:[</span><span class="w">
+
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"brand_color"</span><span class="p">:</span><span class="s2">"#53c876"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Sale of property at 123 Baker St Caulfield Vic 3126"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"header_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"host"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1687398</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1687398</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"last_actioned_step"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Thank you for appointing us to be your selling agents.</span><span class="se">\u</span><span class="s2">000a</span><span class="se">\u</span><span class="s2">000aWe look forward to achieving a great sale result for you!</span><span class="se">\u</span><span class="s2">000aIf you haven't already signed the agreements please download and sign them then upload them using the blue pencil below right."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415316</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Agency and marketing agreement"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"last_actioned_step_state"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"EffectiveDate"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197881+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Id"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"PreviousState"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"State"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"last_actioned_step_state_metadata"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"created_context"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197736+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415317</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_context"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"updated_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004198072+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"metadata"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"created_context"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197000+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415298</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_context"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"updated_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197000+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Sale of property at 123 Baker St Caulfield Vic 3126"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"percentage_complete"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"related_rundls"</span><span class="p">:[</span><span class="w">
+
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"service"</span><span class="p">:</span><span class="mi">24415244</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"service_name"</span><span class="p">:</span><span class="s2">"Real estate sale journey (Demo)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"EffectiveDate"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197881+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Id"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"PreviousState"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"State"</span><span class="p">:</span><span class="mi">2</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"state_metadata"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"created_context"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197350+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415299</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_context"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
+        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"updated_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004198159+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_user"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"video"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Start a rundl based on a service. The user context starting the rundl must have permission to start rundls for the service. The chosen host must have permission to host rundls for the service.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST   /services/{service_id}/rundls?account={account_id}</code></p>
+<h3 id='query-parameters'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>The id of the selected account when starting the rundl</td>
+</tr>
+</tbody></table>
+<h3 id='path-parameters'>Path parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>service_id</td>
+<td>The id of the service being started</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request body</h3>
+<p>TOOD</p>
+<h1 id='rundl-participants'>Rundl participants</h1><h2 id='overview'>Overview</h2>
+<p>Participants are the stakeholders in the business transaction that&#39;s getting delivered as a rundl. People, groups, or members and teams within groups can participate in rundls and be assigned roles.</p>
+<h2 id='the-participant-object'>The participant object</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>TODO</code></td>
+<td>-</td>
+<td>TODO.</td>
+</tr>
+</tbody></table>
+<h2 id='add-a-rundl-participant'>Add a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://test-go.rundl.com/api/rundls/123456/participants?account<span class="o">=</span>123456 <span class="se">\ </span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+      {
+        "addParticipantRequest": {
+          "RundlId": 123456,
+          "Comment": "Hi Zoe, Please join this rundl.",
+          "ReadOnly": false,
+          "EntityId": 873900
+        }
+      }
+  '</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"context"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1688920</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688908</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Sophie Hacking"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">8028d4e949a6bd9f8355530ab9e165d8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1520237422810+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">25577359</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"is_host"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"read_only"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="w">
+    </span><span class="s2">"Default"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"rundl_id"</span><span class="p">:</span><span class="mi">123456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The rundl participants API supports adding existing contexts or inviting new users as participants in a rundl. </p>
+
+<p>For existing contexts, clients can implement the search API to find existing users/groups. For groups, clients can optionally query the Contexts API to find available contexts for that group. Note: Upon adding an existing context, a context&#39;s settings determines if a full participant is added, or if a pending participant is added and a request is created for their approval. Where a request is created, the participant transitions from pending to full after accepting the request.</p>
+
+<p>For new users, add participants by email address. If it&#39;s a new email address on Rundl, a pending pending user is added, and an invitation to join Rundl is sent to the address. Upon accepting the invitation (email receiver clicks link in email and signs up) the pending user and pending participant transitions to a full user and participant. Note: If the email is verified email for an existing user, the existing user is added/invited. </p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST   /rundls/{rundl_id}/participants?account={account_id}</code></p>
+<h3 id='query-parameters'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>The id of the selected account when starting the rundl.</td>
+</tr>
+</tbody></table>
+<h3 id='path-parameters'>Path parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rundl_id</td>
+<td>The id of the rundl the participant is added to.</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request body</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RundlId</td>
+<td>The id of the rundl the participant is added to</td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>The message included in the notification email.</td>
+</tr>
+<tr>
+<td>ReadOnly</td>
+<td>Flag to make the participant an observer.</td>
+</tr>
+<tr>
+<td>EntityId</td>
+<td>The id of the existing context being added as a participant.</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>The firstname of the new user being added as a participant.</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>The surname of the new user being added as a participant.</td>
+</tr>
+<tr>
+<td>mobile</td>
+<td>The phone number of the new user being added as a participant.</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>The email of the new user being added as a participant.</td>
+</tr>
+</tbody></table>
+<h2 id='update-a-rundl-participant'>Update a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/rundls/123456/participants?account<span class="o">=</span>123456 <span class="se">\ </span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+      {
+        "addParticipantRequest": {
+          "RundlId": 123456,
+          "Comment": "Hi Zoe, Please join this rundl.",
+          "ReadOnly": false,
+          "EntityId": 873900
+        }
+      }
+  '</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"context"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1688920</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688908</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Sophie Hacking"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">8028d4e949a6bd9f8355530ab9e165d8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1520237422810+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">25577359</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"is_host"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"read_only"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="w">
+    </span><span class="s2">"Default"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"rundl_id"</span><span class="p">:</span><span class="mi">123456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h1 id='errors'>Errors</h1>
 <aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
 
 <p>The Kittn API uses the following error codes:</p>
@@ -493,9 +2145,6 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
