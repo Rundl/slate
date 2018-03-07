@@ -340,12 +340,9 @@
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
-          </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='mailto:support@rundl.com'>Register your application</a></li>
+            <li><a href='mailto:support@rundl.com?subject=Register your application'>Register your application</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -354,21 +351,19 @@
         <h1 id='welcome'>Welcome</h1>
 <p>Welcome to the Rundl API! </p>
 
-<p>With the Rundl API you can connect with the ecosystem of people, companies, services and data around you business. Create a collaborative community of your teams, customers and partners and bridge the traditional boundaries that constrain how you do business. Find out more about our unique process collaboration model <a href="https://rundl.com">here</a>.</p>
+<p>With the Rundl API you can connect with the ecosystem of people, companies, services and data around you business. Create a collaborative community of your teams, customers and partners and bridge the traditional boundaries that constrain how you do business. Find out more about process collaboration done the Rundl way <a href="https://rundl.com">here</a>.</p>
 
-<p>At Rundl we build our client apps on the same public API that we document here. That means we&#39;re committed to improving this API and making it feature rich, clean and consistent. </p>
+<p>At Rundl we build our client apps on the same public API that we document here. That means we&#39;re committed to ongoing development, making it feature rich, clean and consistent. We welcome you to leverage the Rundl API in your applications too. Please get in touch via <a href="mailto:support@rundl.com">support@rundl.com</a> if you have questions or need help.</p>
 
-<p><strong>The Rundl API is currently in Beta</strong>. That means our API is a work in progress. First, product features are being added regularly. Also, patterns and techniques used in our API have evolved over a number of years, but are not yet evenly rolled out across all endpoints. We&#39;re working as fast as we can to complete a stable version. </p>
-
-<p>So we hope you&#39;ll get onboard and leverage the Rundl API to make your business processes open and collaborative. Please get in touch via <a href="mailto:support@rundl.com">support@rundl.com</a> if you have questions or need help.</p>
+<aside class="notice">
+The Rundl API is currently in Beta. Product features are being added regularly. Also, patterns and techniques used in our API have evolved over a number of years, but are not yet evenly rolled out across all endpoints. We're working as fast as we can to complete a stable version. 
+</aside>
 <h1 id='basics'>Basics</h1><h2 id='rest-api'>REST API</h2>
 <p>The Rundl API has a RESTful interface, providing programmatic access to most of the data available in the system. It provides URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.</p>
 <h2 id='event-subscriptions'>Event subscriptions</h2>
-<p>Rundl is currently developing an event callback solution that enables your application to be called when an event of interest occurs.</p>
+<p>Rundl is currently developing an event callback solution that enables your application to be called when an event of interest occurs. The solution involves subscribing to particular events and configuring a target that you manage. </p>
 
-<p>The solution is based on the concept of configuring targets for events. An <a href="https://aws.amazon.com/sns/">AWS SNS topic</a> is the first target we&#39;re implementing. </p>
-
-<p>We envisage a range of different targets in future, including a HTTP end-point. </p>
+<p>An <a href="https://aws.amazon.com/sns/">AWS SNS topic</a> is the first target we&#39;re implementing. We envisage a range of different targets in future, including a HTTP end-point. </p>
 <h2 id='environments'>Environments</h2>
 <p>The API can be accessed from our test and live environments:</p>
 
@@ -590,7 +585,7 @@ TODO: Current formats are mixed. In future, all timestamps will be formatted as 
 </tr>
 <tr>
 <td><code>refresh_token</code></td>
-<td><strong>Not implemented.</strong></td>
+<td><em>Not implemented.</em></td>
 <td></td>
 </tr>
 </tbody></table>
@@ -681,12 +676,12 @@ Instead of passing the client_id and client_secret values as query parameters in
 </tr>
 <tr>
 <td><code>scope</code></td>
-<td><strong>Not implemented.</strong></td>
+<td><em>Not implemented.</em></td>
 <td></td>
 </tr>
 <tr>
 <td><code>state</code></td>
-<td><strong>Not implemented.</strong></td>
+<td><em>Not implemented.</em></td>
 <td></td>
 </tr>
 </tbody></table>
@@ -715,11 +710,11 @@ Currently Rundl's OAuth implementation supports a user implicitly granting your 
 </tr>
 <tr>
 <td><code>redirect_uri</code></td>
-<td><strong>Not implemented.</strong> Included for verification.</td>
+<td><em>Not implemented.</em> Included for verification.</td>
 </tr>
 <tr>
 <td><code>state</code></td>
-<td><strong>Not implemented.</strong> Included for verification.</td>
+<td><em>Not implemented.</em> Included for verification.</td>
 </tr>
 <tr>
 <td><code>stay_signed_in</code></td>
@@ -783,15 +778,15 @@ Currently Rundl's OAuth implementation supports a user implicitly granting your 
 </tr>
 <tr>
 <td><code>redirect_uri</code></td>
-<td><strong>Not implemented.</strong></td>
+<td><em>Not implemented.</em></td>
 </tr>
 <tr>
 <td><code>state</code></td>
-<td><strong>Not implemented.</strong></td>
+<td><em>Not implemented.</em></td>
 </tr>
 <tr>
 <td><code>refresh_token</code></td>
-<td><strong>Not implemented.</strong></td>
+<td><em>Not implemented.</em></td>
 </tr>
 <tr>
 <td><code>stay_logged_in</code></td>
@@ -1301,13 +1296,9 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 </tr>
 </tbody></table>
 <h3 id='request-body'>Request body</h3>
-<p>TODO</p>
-
-<aside class="success">Remember — a happy kitten is an authenticated kitten!</aside>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>See example request.</p>
 <h1 id='files'>Files</h1><h2 id='overview'>Overview</h2>
-<p>Upload files to Rundl before attaching to other entities within the Rundl API. Rundl uses AWS S3 as it&#39;s file storage backend. </p>
+<p>Upload files to Rundl before attaching to other entities within the Rundl API. Rundl uses AWS S3 as its file storage backend. </p>
 
 <p>Uploading files is a three-step process:</p>
 
@@ -1917,21 +1908,63 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 </tr>
 </tbody></table>
 <h3 id='request-body'>Request body</h3>
-<p>TOOD</p>
+<p>See example request.</p>
 <h1 id='rundl-participants'>Rundl participants</h1><h2 id='overview'>Overview</h2>
-<p>Participants are the stakeholders in the business transaction that&#39;s getting delivered as a rundl. People, groups, or members and teams within groups can participate in rundls and be assigned roles.</p>
+<p>Participants are the stakeholders in the business transaction that&#39;s getting delivered as a rundl. People, groups, or members and teams within groups, can participate in rundls.</p>
+
+<p>The rundl participants API supports adding existing contexts or inviting new users as participants in a rundl. </p>
+
+<p>For existing contexts, clients can implement the search API to find existing users/groups. For groups, clients can optionally query the Contexts API to find available contexts for that group. Note: Upon adding an existing context, a context&#39;s settings determines if a full participant is added, or if a pending participant is added and a request is created for their approval. Where a request is created, the participant transitions from pending to full after accepting the request.</p>
+
+<p>For new users, add participants by supplying person details including their email address. A pending user and participant is added and an invitation to join Rundl is sent to the address. Upon accepting the invitation (email receiver clicks link in email and signs up) the pending user and participant transitions to a full. </p>
+
+<aside class="warning">When attempting to add a new user, if the supplied email is already a verified email for an existing user, the existing user is simply added/invited. Other person details will be ignored.</aside>
 <h2 id='the-participant-object'>The participant object</h2>
 <table><thead>
 <tr>
 <th>Attribute</th>
-<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><code>TODO</code></td>
-<td>-</td>
-<td>TODO.</td>
+<td><code>id</code></td>
+<td>The id of the participant.</td>
+</tr>
+<tr>
+<td><code>rundl</code></td>
+<td>The id of the rundl the participant is added to.</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td>The id of the existing context being added as a participant. <br/><code>Expandable</code></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Status of the participant.</td>
+</tr>
+<tr>
+<td><code>roles</code></td>
+<td>Array of role names asigned to the participant.</td>
+</tr>
+<tr>
+<td><code>is_host</code></td>
+<td>Flag to indicate if participant is the host.</td>
+</tr>
+<tr>
+<td><code>observer</code></td>
+<td>Flag for making participant an observer.</td>
+</tr>
+<tr>
+<td><code>created_date</code></td>
+<td>The date the participant was added.</td>
+</tr>
+<tr>
+<td><code>person</code></td>
+<td>An object with <code>first_name</code>, <code>last_name</code>, <code>mobile</code>, and <code>email</code> details for a new user to add as a participant.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>Message included in invitation email when adding a participant.</td>
 </tr>
 </tbody></table>
 <h2 id='add-a-rundl-participant'>Add a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://test-go.rundl.com/api/rundls/123456/participants?account<span class="o">=</span>123456 <span class="se">\ </span>
@@ -1939,11 +1972,12 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
   --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
       {
-        "addParticipantRequest": {
-          "RundlId": 123456,
-          "Comment": "Hi Zoe, Please join this rundl.",
-          "ReadOnly": false,
-          "EntityId": 873900
+        "participant":{
+          "rundl":123456,
+          "message":"I would like to add you as a participant in this rundl.",
+          "observer":false,
+          "context":1688908,
+          "person":{}
         }
       }
   '</span>
@@ -1952,34 +1986,18 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"context"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1688920</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688908</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Sophie Hacking"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">8028d4e949a6bd9f8355530ab9e165d8"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"context"</span><span class="p">:</span><span class="mi">1688908</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1520237422810+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">25577359</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_host"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"read_only"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="w">
-    </span><span class="s2">"Default"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"rundl_id"</span><span class="p">:</span><span class="mi">123456</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">2</span><span class="w">
+  </span><span class="s2">"observer"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"person"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="s2">"Default"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"rundl"</span><span class="p">:</span><span class="mi">123456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>The rundl participants API supports adding existing contexts or inviting new users as participants in a rundl. </p>
-
-<p>For existing contexts, clients can implement the search API to find existing users/groups. For groups, clients can optionally query the Contexts API to find available contexts for that group. Note: Upon adding an existing context, a context&#39;s settings determines if a full participant is added, or if a pending participant is added and a request is created for their approval. Where a request is created, the participant transitions from pending to full after accepting the request.</p>
-
-<p>For new users, add participants by email address. If it&#39;s a new email address on Rundl, a pending pending user is added, and an invitation to join Rundl is sent to the address. Upon accepting the invitation (email receiver clicks link in email and signs up) the pending user and pending participant transitions to a full user and participant. Note: If the email is verified email for an existing user, the existing user is added/invited. </p>
-<h3 id='http-request'>HTTP Request</h3>
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
 <p><code>POST   /rundls/{rundl_id}/participants?account={account_id}</code></p>
 <h3 id='query-parameters'>Query parameters</h3>
 <table><thead>
@@ -1989,7 +2007,7 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 </tr>
 </thead><tbody>
 <tr>
-<td>account_id</td>
+<td><code>account_id</code></td>
 <td>The id of the selected account when starting the rundl.</td>
 </tr>
 </tbody></table>
@@ -2001,60 +2019,28 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 </tr>
 </thead><tbody>
 <tr>
-<td>rundl_id</td>
+<td><code>rundl_id</code></td>
 <td>The id of the rundl the participant is added to.</td>
 </tr>
 </tbody></table>
 <h3 id='request-body'>Request body</h3>
-<table><thead>
-<tr>
-<th>Attribute</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>RundlId</td>
-<td>The id of the rundl the participant is added to</td>
-</tr>
-<tr>
-<td>Comment</td>
-<td>The message included in the notification email.</td>
-</tr>
-<tr>
-<td>ReadOnly</td>
-<td>Flag to make the participant an observer.</td>
-</tr>
-<tr>
-<td>EntityId</td>
-<td>The id of the existing context being added as a participant.</td>
-</tr>
-<tr>
-<td>first_name</td>
-<td>The firstname of the new user being added as a participant.</td>
-</tr>
-<tr>
-<td>last_name</td>
-<td>The surname of the new user being added as a participant.</td>
-</tr>
-<tr>
-<td>mobile</td>
-<td>The phone number of the new user being added as a participant.</td>
-</tr>
-<tr>
-<td>Email</td>
-<td>The email of the new user being added as a participant.</td>
-</tr>
-</tbody></table>
-<h2 id='update-a-rundl-participant'>Update a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/rundls/123456/participants?account<span class="o">=</span>123456 <span class="se">\ </span>
+<p>See example request.</p>
+<h2 id='update-a-rundl-participant'>Update a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://test-go.rundl.com/api/rundls/123456/participants/25577359?account<span class="o">=</span>123456 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
       {
-        "addParticipantRequest": {
-          "RundlId": 123456,
-          "Comment": "Hi Zoe, Please join this rundl.",
-          "ReadOnly": false,
-          "EntityId": 873900
+        "participant":{
+          "comment":null,
+          "context":1688908,
+          "created_date":"/Date(1520237422810+0000)/",
+          "id":25577359,
+          "is_host":false,
+          "observer":false,
+          "person":null,
+          "roles":["Seller"],
+          "rundl":123456,
+          "status":2
         }
       }
   '</span>
@@ -2063,83 +2049,51 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"context"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1688920</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688908</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Sophie Hacking"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">8028d4e949a6bd9f8355530ab9e165d8"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"context"</span><span class="p">:</span><span class="mi">1688908</span><span class="p">,</span><span class="w">
   </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1520237422810+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">25577359</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_host"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"read_only"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="w">
-    </span><span class="s2">"Default"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"rundl_id"</span><span class="p">:</span><span class="mi">123456</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">2</span><span class="w">
+  </span><span class="s2">"observer"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"person"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="s2">"Seller"</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"rundl"</span><span class="p">:</span><span class="mi">123456</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
+</span></code></pre>
+<p>Updates the participant&#39;s roles or toggles being an observer.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>PUT    /rundls/{rundl_id}/participants/{participant_id}?account={account_id}</code></p>
+<h3 id='query-parameters-2'>Query parameters</h3>
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Parameter</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request sucks.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td><code>account_id</code></td>
+<td>The id of the selected account when starting the rundl.</td>
 </tr>
 </tbody></table>
+<h3 id='path-parameters-2'>Path parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>rundl_id</code></td>
+<td>The id of the rundl the participant is added to.</td>
+</tr>
+<tr>
+<td><code>participant_id</code></td>
+<td>The id of the participant to update.</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-2'>Request body</h3>
+<p>See example request.</p>
 
       </div>
       <div class="dark-box">
