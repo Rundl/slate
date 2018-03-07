@@ -31,9 +31,9 @@ Attribute | Type | Description
 ## Start a rundl
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account=1687398 \ 
+curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account=123456 \ 
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth Q2owOEdEekpmamFLdU5xMVNiYTYyNmpqak9ENGtaMjI1RFFmWjJYY2MxVzBRRWxZT3kzOUpCck9pcVFadzY2MUxRdw==' \
+  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
   --data '
       {
       "rundl":{
@@ -334,3 +334,23 @@ curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account=1687
 ```
 
 Start a rundl based on a service. The user context starting the rundl must have permission to start rundls for the service. The chosen host must have permission to host rundls for the service.
+
+### HTTP Request
+
+`POST	/services/{service_id}/rundls?account={account_id}`
+
+### Query parameters
+
+Parameter | Description
+--------- | -----------
+account_id | The id of the selected account when starting the rundl
+
+### Path parameters
+
+Parameter | Description
+--------- | -----------
+service_id | The id of the service being started
+
+### Request body
+
+See example request.

@@ -2,15 +2,13 @@
 
 ## REST API
 
-The Rundl API has a RESTful interface, providing programmatic access to most of the data available in the system. It provides URLs for access resources and leverages built-in HTTP features to take requests and return responses.
+The Rundl API has a RESTful interface, providing programmatic access to most of the data available in the system. It provides URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.
 
 ## Event subscriptions
 
-Rundl is currently developing an event callback solution that enables your application to be called when an event of interest occurs.
+Rundl is currently developing an event callback solution that enables your application to be called when an event of interest occurs. The solution involves subscribing to particular events and configuring a target that you manage. 
 
-The solution is based on the concept of configuring targets for events. An [AWS SNS topic](https://aws.amazon.com/sns/) is the first target we're implementing. 
-
-We envisage a range of different targets in future, including a HTTP end-point. 
+An [AWS SNS topic](https://aws.amazon.com/sns/) is the first target we're implementing. We envisage a range of different targets in future, including a HTTP end-point. 
 
 ## Environments
 
@@ -50,7 +48,7 @@ The content type being passed to the API for all requests is application/json. S
 
 Understanding Rundl accounts is an important part of using the API. 
 
-A user may have multiple account scopes in a single session on Rundl. For example, a user will always have their personal account, and additionally, may be part of their employer's group account. Therefore, most APIs on Rundl require passing an account parameter. This parameter reflects the user's current account, which is the account scope to use when making a request. Importantly, the user's authorisations will most likely differ depending on their account.
+A user may have multiple account scopes in a single session on Rundl. For example, a user will always have their personal account, and additionally, may be part of a group account (typically, a group account for their company). Therefore, most APIs on Rundl require passing an account parameter. This parameter reflects the user's current account, which is the account scope to use when making a request. Importantly, a user's authorisations will most likely differ depending on their account.
 
 ## Rate limits
 
@@ -61,9 +59,9 @@ Rundl does not currently apply rate limiting. We do log all API requests and mon
 > To specify the number of items in a list, use the count query parameter:
 
 ```shell
-curl https://test-go.rundl.com/api/activity?account=873925&count=12 \
+curl https://test-go.rundl.com/api/activity?account=123456&count=12 \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth S29Fb3c5bFZ3azRDVmxNdnBVY1BibjhrbFpwTG5HdTIzTVVlbUduMVRYeEhFWm8zUVpveGpQQThrSXVLa0tnOGc='
+  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>'
 ```
 
 In the Rundl API you'll come across list endpoints, like lists of activity, rundls, services or reminders. 
@@ -79,8 +77,8 @@ By default most list endpoints return a maximum of 100 items per page. However, 
   ],
   "object":"list",
   "paging":{
-    "next":"https:\/\/test-go.rundl.com\/api\/activity?account=5099809&cursor=9a0c1d45d46",
-    "previous":"https:\/\/test-go.rundl.com\/api\/activity?account=5099809&cursor=f5d8f4e51aa",
+    "next":"https:\/\/test-go.rundl.com\/api\/activity?account=123456&cursor=9a0c1d45d46",
+    "previous":"https:\/\/test-go.rundl.com\/api\/activity?account=123456&cursor=f5d8f4e51aa",
     "strategy":2
   }
 }
@@ -105,9 +103,9 @@ Parameter | Description
 > To retrieve related objects as part of a single request, use the expand query parameter:
 
 ```shell
-curl https://test-go.rundl.com/api/messages/23420341?account=286894&context_mode=insensitive&expand=comments%2Clinks%2Cfiles%2Creminders \
+curl https://test-go.rundl.com/api/messages/23420341?account=123456&context_mode=insensitive&expand=comments%2Clinks%2Cfiles%2Creminders \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth S29Fb3c5bFZ3azRDVmxNdnBVY1BibjhrbFpwTG5HdTIzTVVlbUduMVRYeEhFWm8zUVpveGpQQThrSXVLa0tnOGc='
+  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>'
 ```
 
 > The above request returns an expanded message object as part of the response (example json truncated for brevity):
@@ -166,7 +164,7 @@ For example, a message object has related comments, reminders, files and links. 
 ### Time stamps
 
 Time stamps are presented in UTC time.
-TODO: Current format. In future, all timestamps will be formatted as ISO 8601 strings. For example: `2016-04-23T18:25:43.511Z`
+TODO: Current formats are mixed. In future, all timestamps will be formatted as ISO 8601 strings. For example: `2016-04-23T18:25:43.511Z`
 
 ## Errors
 The API policy is to return a relevant HTTP Error code with an error description.

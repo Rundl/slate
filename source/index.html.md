@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='mailto:support@rundl.com'>Register your application</a>
+  - <a href='mailto:support@rundl.com?subject=Register your application'>Register your application</a>
 
 includes:
   - welcome
@@ -14,7 +14,7 @@ includes:
   - orders
   - files
   - rundls
-  - errors
+  - rundl-participants
 
 search: true
 ---

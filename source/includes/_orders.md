@@ -27,9 +27,9 @@ Attribute | Type | Description
 ## Order a service
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/orders?account=286894 \
+curl -X POST https://test-go.rundl.com/api/orders?account=123456 \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth Q2owOEdEekpmamFLdU5xMVNiYTYyNmpqak9ENGtaMjI1RFFmWjJYY2MxVzBRRWxZT3kzOUpCck9pcVFadzY2MUxRdw==' \
+  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
   --data '
     {
       "order": {
@@ -161,19 +161,14 @@ Order a service from a Rundl service provider. The user context sending the orde
 
 ### HTTP Request
 
-`POST	/orders`
+`POST	/orders?account={account_id}`
 
 ### Query parameters
 
 Parameter | Description
 --------- | -----------
-account | The id of the selected account when ordering the service
+account_id | The id of the selected account when ordering the service
 
-### Path parameters
+### Request body
 
-### Body parameters
-
-
-<aside class="success">Remember — a happy kitten is an authenticated kitten!</aside>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+See example request.
