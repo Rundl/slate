@@ -2,13 +2,23 @@
 
 ## REST API
 
-The Rundl API has a RESTful interface, providing programmatic access to most of the data available in the system. It provides URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.
+The Rundl API is a RESTful Web API, providing programmatic access to resources representing relevant concepts on our platform. It includes URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.
 
-## Event subscriptions
+## Event Subscriptions
 
-Rundl is currently developing an event callback solution that enables your application to be called when an event of interest occurs. The solution involves subscribing to particular events and configuring a target that you manage. 
+Rundl Event Subscriptions is a callback solution that enables your application to be called when an event of interest occurs on the platform. The solution involves subscribing to particular event types, which are sent to a target service in your own infrastructure that you manage. 
 
-An [AWS SNS topic](https://aws.amazon.com/sns/) is the first target we're implementing. We envisage a range of different targets in future, including a HTTP end-point. 
+An [AWS SNS topic](https://aws.amazon.com/sns/) is our first target (we envisage a range of different targets in future, including a HTTP end-point). 
+
+Contact support@rundl.com if you'd like this service enabled on your account.
+
+Rundl will trigger sending events in 10 second intervals.
+
+## Embedded Apps
+
+Embed your custom HTML5 web app in an iframe container on Rundl's web app at https://go.rundl.com for presentation layer integration.
+
+An embedded app is provided OAuth credentials upon registration, and is configured with an HTTP end-point where the app resides. When a request is made to load your app a signed request that is sent that can be used to verify the authenticty of the request and includes information that allows you to establish a session for a user when further interactions with the Rundl REST API is required. 
 
 ## Environments
 
@@ -86,7 +96,7 @@ By default most list endpoints return a maximum of 100 items per page. However, 
 
 When the response has more items than the initial page, you can paginate through the results. 
 
-Some list endpoints have outdated limiting parameters, and we'll document these where relevant. However the Rundl API now offers pagination via the concept of cursors. These are special tokens that function as markers in a series. If a list endpoint supports cursor-based pagination you'll receive and extra object as part of the response, called `paging`.
+Some list endpoints have outdated limiting parameters, and we'll document these where relevant. However the Rundl API now offers pagination via the concept of cursors. These are special tokens that function as markers in a series. If a list endpoint supports cursor-based pagination you'll receive an extra `paging` object as part of the response.
 
 To move forwards or backwards through the pages send the `next` or `previous` cursor to the endpoint.
 

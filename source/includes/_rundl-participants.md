@@ -93,7 +93,7 @@ curl -X PUT https://test-go.rundl.com/api/rundls/123456/participants/25577359?ac
   --data '
       {
         "participant":{
-          "comment":null,
+          "message":null,
           "context":1688908,
           "created_date":"/Date(1520237422810+0000)/",
           "id":25577359,

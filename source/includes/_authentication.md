@@ -113,8 +113,8 @@ Send your users to the Rundl authorisation page.
 
 Pass the following query parameters:
 
-Parameter | Default | Description
---------- | ------- | -----------
+Parameter | Description
+--------- | -----------
 `response_type` | Options: `code` (default) Authorization code grant flow is the only user authorised grant type currently supported.
 `client_id` | The client id you received from Rundl when registering your application.
 `redirect_uri` | The URI in your application where users get sent after a user decides to log in to your application. If not supplied, user will be redirected to https://test-go.rundl.com/dashboard.
@@ -265,7 +265,7 @@ In addition to the standard requirements for registering your application, you w
 > Generate private key:
 
 ```shell
-openssl genrsa -aes256 -out private_key.pem 2048
+openssl genrsa -out private_key.pem 2048
 ```
 
 > Generate public key:
