@@ -230,7 +230,10 @@
                     <a href="#rest-api" class="toc-h2 toc-link" data-title="REST API">REST API</a>
                   </li>
                   <li>
-                    <a href="#event-subscriptions" class="toc-h2 toc-link" data-title="Event subscriptions">Event subscriptions</a>
+                    <a href="#event-subscriptions" class="toc-h2 toc-link" data-title="Event Subscriptions">Event Subscriptions</a>
+                  </li>
+                  <li>
+                    <a href="#embedded-apps" class="toc-h2 toc-link" data-title="Embedded Apps">Embedded Apps</a>
                   </li>
                   <li>
                     <a href="#environments" class="toc-h2 toc-link" data-title="Environments">Environments</a>
@@ -353,17 +356,25 @@
 
 <p>With the Rundl API you can connect with the ecosystem of people, companies, services and data around you business. Create a collaborative community of your teams, customers and partners and bridge the traditional boundaries that constrain how you do business. Find out more about process collaboration done the Rundl way <a href="https://rundl.com">here</a>.</p>
 
-<p>At Rundl we build our client apps on the same public API that we document here. That means we&#39;re committed to ongoing development, making it feature rich, clean and consistent. We welcome you to leverage the Rundl API in your applications too. Please get in touch via <a href="mailto:support@rundl.com">support@rundl.com</a> if you have questions or need help.</p>
+<p>At Rundl we build our client apps on the same public API that we document here. That means we&#39;re committed to its ongoing development, making it feature rich, clean and consistent. We welcome you to leverage the Rundl API in your applications too. Please get in touch via <a href="mailto:support@rundl.com">support@rundl.com</a> if you need help, have questions or to get started.</p>
 
 <aside class="notice">
 The Rundl API is currently in Beta. Product features are being added regularly. Also, patterns and techniques used in our API have evolved over a number of years, but are not yet evenly rolled out across all endpoints. We're working as fast as we can to complete a stable version. 
 </aside>
 <h1 id='basics'>Basics</h1><h2 id='rest-api'>REST API</h2>
-<p>The Rundl API has a RESTful interface, providing programmatic access to most of the data available in the system. It provides URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.</p>
-<h2 id='event-subscriptions'>Event subscriptions</h2>
-<p>Rundl is currently developing an event callback solution that enables your application to be called when an event of interest occurs. The solution involves subscribing to particular events and configuring a target that you manage. </p>
+<p>The Rundl API is a RESTful Web API, providing programmatic access to resources representing relevant concepts on our platform. It includes URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.</p>
+<h2 id='event-subscriptions'>Event Subscriptions</h2>
+<p>Rundl Event Subscriptions is a callback solution that enables your application to be called when an event of interest occurs on the platform. The solution involves subscribing to particular event types, which are sent to a target service in your own infrastructure that you manage. </p>
 
-<p>An <a href="https://aws.amazon.com/sns/">AWS SNS topic</a> is the first target we&#39;re implementing. We envisage a range of different targets in future, including a HTTP end-point. </p>
+<p>An <a href="https://aws.amazon.com/sns/">AWS SNS topic</a> is our first target (we envisage a range of different targets in future, including a HTTP end-point). </p>
+
+<p>Contact support@rundl.com if you&#39;d like this service enabled on your account.</p>
+
+<p>Rundl will trigger sending events in 10 second intervals.</p>
+<h2 id='embedded-apps'>Embedded Apps</h2>
+<p>Embed your custom HTML5 web app in an iframe container on Rundl&#39;s web app at https://go.rundl.com for presentation layer integration.</p>
+
+<p>An embedded app is provided OAuth credentials upon registration, and is configured with an HTTP end-point where the app resides. When a request is made to load your app a signed request that is sent that can be used to verify the authenticty of the request and includes information that allows you to establish a session for a user when further interactions with the Rundl REST API is required. </p>
 <h2 id='environments'>Environments</h2>
 <p>The API can be accessed from our test and live environments:</p>
 
@@ -425,7 +436,7 @@ As you'll first need access to our test environment, this documentation uses htt
 </span></code></pre>
 <p>When the response has more items than the initial page, you can paginate through the results. </p>
 
-<p>Some list endpoints have outdated limiting parameters, and we&#39;ll document these where relevant. However the Rundl API now offers pagination via the concept of cursors. These are special tokens that function as markers in a series. If a list endpoint supports cursor-based pagination you&#39;ll receive and extra object as part of the response, called <code>paging</code>.</p>
+<p>Some list endpoints have outdated limiting parameters, and we&#39;ll document these where relevant. However the Rundl API now offers pagination via the concept of cursors. These are special tokens that function as markers in a series. If a list endpoint supports cursor-based pagination you&#39;ll receive an extra <code>paging</code> object as part of the response.</p>
 
 <p>To move forwards or backwards through the pages send the <code>next</code> or <code>previous</code> cursor to the endpoint.</p>
 
@@ -655,34 +666,28 @@ Instead of passing the client_id and client_secret values as query parameters in
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><code>response_type</code></td>
 <td>Options: <code>code</code> (default) Authorization code grant flow is the only user authorised grant type currently supported.</td>
-<td></td>
 </tr>
 <tr>
 <td><code>client_id</code></td>
 <td>The client id you received from Rundl when registering your application.</td>
-<td></td>
 </tr>
 <tr>
 <td><code>redirect_uri</code></td>
 <td>The URI in your application where users get sent after a user decides to log in to your application. If not supplied, user will be redirected to https://test-go.rundl.com/dashboard.</td>
-<td></td>
 </tr>
 <tr>
 <td><code>scope</code></td>
 <td><em>Not implemented.</em></td>
-<td></td>
 </tr>
 <tr>
 <td><code>state</code></td>
 <td><em>Not implemented.</em></td>
-<td></td>
 </tr>
 </tbody></table>
 
@@ -881,7 +886,7 @@ Instead of passing the client_id and client_secret values as query parameters in
 
 <p>Generate private key:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>openssl genrsa -aes256 -out private_key.pem 2048
+<pre class="highlight shell tab-shell"><code>openssl genrsa -out private_key.pem 2048
 </code></pre>
 <blockquote>
 <p>Generate public key:</p>
@@ -2031,7 +2036,7 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
   --data <span class="s1">'
       {
         "participant":{
-          "comment":null,
+          "message":null,
           "context":1688908,
           "created_date":"/Date(1520237422810+0000)/",
           "id":25577359,
