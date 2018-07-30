@@ -174,7 +174,16 @@ For example, a message object has related comments, reminders, files and links. 
 ### Time stamps
 
 Time stamps are presented in UTC time.
-TODO: Current formats are mixed. In future, all timestamps will be formatted as ISO 8601 strings. For example: `2016-04-23T18:25:43.511Z`
+
+In future, all timestamps will be formatted as ISO 8601 strings. For example: `2016-04-23T18:25:43.511Z`
+
+
+(TODO) Currently API reponses will serialise dates differently. 
+
+Format | Description
+--------- | ---------
+wcf DateTime JSON | Date object, represented in JSON as "\/Date(number of ticks)\/".<br/>See https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx.
+
 
 ## Errors
 The API policy is to return a relevant HTTP Error code with an error description.

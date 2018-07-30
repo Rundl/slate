@@ -31,7 +31,7 @@ Attribute | Type | Description
 ## Start a rundl
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account=123456 \ 
+curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account=123456&checkout=30798521&payment_account=30736909 \ 
   --header 'Content-Type: application/json' \
   --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
   --data '
@@ -337,13 +337,15 @@ Start a rundl based on a service. The user context starting the rundl must have 
 
 ### HTTP Request
 
-`POST	/services/{service_id}/rundls?account={account_id}`
+`POST	/services/{service_id}/rundls?account={account_id}&checkout={checkout}&payment_account={payment_account}`
 
 ### Query parameters
 
 Parameter | Description
 --------- | -----------
 account_id | The id of the selected account when starting the rundl
+checkout | The id of a checkout resource created for the purpose of the start rundl request
+payment_account | The id of the payment account for the rundl host. The host will be charged the relevant host fee.
 
 ### Path parameters
 

@@ -11,8 +11,10 @@ includes:
   - welcome
   - basics
   - authentication
+  - core-resources
   - orders
   - files
+  - checkouts
   - rundls
   - rundl-participants
 
