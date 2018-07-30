@@ -282,6 +282,14 @@
               </ul>
           </li>
           <li>
+            <a href="#core-resources" class="toc-h1 toc-link" data-title="Core resources">Core resources</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#the-gid-object" class="toc-h2 toc-link" data-title="The gid object">The gid object</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
               <ul class="toc-list-h2">
                   <li>
@@ -309,6 +317,29 @@
                   </li>
                   <li>
                     <a href="#update-an-upload_session" class="toc-h2 toc-link" data-title="Update an upload_session">Update an upload_session</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#checkouts" class="toc-h1 toc-link" data-title="Checkouts">Checkouts</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#the-checkout-object" class="toc-h2 toc-link" data-title="The checkout object">The checkout object</a>
+                  </li>
+                  <li>
+                    <a href="#the-checkout-item-object" class="toc-h2 toc-link" data-title="The (checkout) item object">The (checkout) item object</a>
+                  </li>
+                  <li>
+                    <a href="#the-product-object" class="toc-h2 toc-link" data-title="The product object">The product object</a>
+                  </li>
+                  <li>
+                    <a href="#the-tax_line-object" class="toc-h2 toc-link" data-title="The tax_line object">The tax_line object</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-checkout" class="toc-h2 toc-link" data-title="Create a checkout">Create a checkout</a>
                   </li>
               </ul>
           </li>
@@ -352,14 +383,14 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
-<p>Welcome to the Rundl API! </p>
+<p>Welcome to the Rundl API reference. </p>
 
-<p>With the Rundl API you can connect with the ecosystem of people, companies, services and data around you business. Create a collaborative community of your teams, customers and partners and bridge the traditional boundaries that constrain how you do business. Find out more about process collaboration done the Rundl way <a href="https://rundl.com">here</a>.</p>
+<p>With the Rundl API you can connect your applications with the network of people, companies, services and data around you business processes. Create a collaborative community of your teams, customers and partners to bridge boundaries that constrain business processes. Find out more about process collaboration done the Rundl way <a href="https://rundl.com">here</a>.</p>
 
 <p>At Rundl we build our client apps on the same public API that we document here. That means we&#39;re committed to its ongoing development, making it feature rich, clean and consistent. We welcome you to leverage the Rundl API in your applications too. Please get in touch via <a href="mailto:support@rundl.com">support@rundl.com</a> if you need help, have questions or to get started.</p>
 
 <aside class="notice">
-The Rundl API is currently in Beta. Product features are being added regularly. Also, patterns and techniques used in our API have evolved over a number of years, but are not yet evenly rolled out across all endpoints. We're working as fast as we can to complete a stable version. 
+The Rundl API is currently in Beta. We add product features regularly. Also, patterns and techniques used in our API have evolved over a number of years, but are not yet evenly rolled out across all endpoints. We're working as fast as we can to complete a stable version. 
 </aside>
 <h1 id='basics'>Basics</h1><h2 id='rest-api'>REST API</h2>
 <p>The Rundl API is a RESTful Web API, providing programmatic access to resources representing relevant concepts on our platform. It includes URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.</p>
@@ -518,8 +549,23 @@ As you'll first need access to our test environment, this documentation uses htt
 
 <p>For example, a message object has related comments, reminders, files and links. These related objects can be retrieved independently via separate requests. However, you can get a message&#39;s comments, reminders, files and links along with the message by passing a comma-separated string of related objects in the expand parameter: <code>expand=comments%2Clinks%2Cfiles%2Creminders</code></p>
 <h2 id='data-types'>Data types</h2><h3 id='time-stamps'>Time stamps</h3>
-<p>Time stamps are presented in UTC time.
-TODO: Current formats are mixed. In future, all timestamps will be formatted as ISO 8601 strings. For example: <code>2016-04-23T18:25:43.511Z</code></p>
+<p>Time stamps are presented in UTC time.</p>
+
+<p>In future, all timestamps will be formatted as ISO 8601 strings. For example: <code>2016-04-23T18:25:43.511Z</code></p>
+
+<p>(TODO) Currently API reponses will serialise dates differently. </p>
+
+<table><thead>
+<tr>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>wcf DateTime JSON</td>
+<td>Date object, represented in JSON as &quot;\/Date(number of ticks)\/&quot;.<br/>See https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx.</td>
+</tr>
+</tbody></table>
 <h2 id='errors'>Errors</h2>
 <p>The API policy is to return a relevant HTTP Error code with an error description.</p>
 <h1 id='authentication'>Authentication</h1>
@@ -1071,6 +1117,32 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <p>You can also pass the access token as a URL parameter to one of our responsive shared pages.</p>
 
 <p><code>https://go.rundl.com/auth/session?access_token={&lt;User-Access-Token&gt;}&amp;redirect_url={redirect_url}</code></p>
+<h1 id='core-resources'>Core resources</h1><h2 id='the-gid-object'>The gid object</h2>
+<p>Generic object representing any resource on Rundl</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Unique identifier for the resource.</td>
+</tr>
+<tr>
+<td><code>global_type</code></td>
+<td>integer</td>
+<td>Unique identifier for the type of object.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>The name of the resource.</td>
+</tr>
+</tbody></table>
 <h1 id='orders'>Orders</h1><h2 id='overview'>Overview</h2>
 <p>Take control of acquiring new customers and starting transactional work. Service providers can offer services to their customers and referral partners and track opportunities sent as orders.</p>
 <h2 id='the-order-object'>The order object</h2>
@@ -1479,6 +1551,303 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <td>The token to identify the upload session.</td>
 </tr>
 </tbody></table>
+<h1 id='checkouts'>Checkouts</h1><h2 id='overview'>Overview</h2>
+<p>A checkout represents the attributes of in-app purchase to be made on Rundl. Creating a checkout is required before making a purchase, such as when starting a rundl or consuming an add-on. The checkout id is passed as a URL parameter to APIs related to purchase flows.</p>
+<h2 id='the-checkout-object'>The checkout object</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Unique identifier for the checkout.</td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td>string</td>
+<td>String representing the object&#39;s type. Value is checkout</td>
+</tr>
+<tr>
+<td><code>seller</code></td>
+<td>object</td>
+<td>The <a href="#the-gid-object">gid object</a> for the seller&#39;s account.</td>
+</tr>
+<tr>
+<td><code>buyer</code></td>
+<td>object</td>
+<td>The <a href="#the-gid-object">gid object</a> for the buyer&#39;s account.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Status of the order. See states reference.</td>
+</tr>
+<tr>
+<td><code>product_order</code></td>
+<td>integer</td>
+<td>Unique identifier for the product order created after the checkout and subsequent steps in the purchase workflow.</td>
+</tr>
+<tr>
+<td><code>items</code></td>
+<td>list</td>
+<td>A list of checkout items.</td>
+</tr>
+<tr>
+<td><code>items_total_price</code></td>
+<td>string</td>
+<td>The total price of all the checkout items.</td>
+</tr>
+<tr>
+<td><code>total_tax</code></td>
+<td>string</td>
+<td>The total tax of the checkout.</td>
+</tr>
+<tr>
+<td><code>total_price</code></td>
+<td>string</td>
+<td>The total price of the checkout including tax.</td>
+</tr>
+<tr>
+<td><code>currency</code></td>
+<td>string</td>
+<td>ISO 4217 three-letter code.</td>
+</tr>
+<tr>
+<td><code>payment_account_types</code></td>
+<td>string array</td>
+<td>Options: <code>credit_card</code>, <code>manual</code></td>
+</tr>
+<tr>
+<td><code>payment_token</code></td>
+<td>string</td>
+<td>Security token for credit card checkouts</td>
+</tr>
+<tr>
+<td><code>related</code></td>
+<td>integer</td>
+<td>unique identifier of the related entity being purchased</td>
+</tr>
+<tr>
+<td><code>service</code></td>
+<td>integer</td>
+<td>Unique identifier of the service type related to a rundl checkout</td>
+</tr>
+<tr>
+<td><code>rundl</code></td>
+<td>integer</td>
+<td>Unique identifier of the rundl related to the checkout</td>
+</tr>
+<tr>
+<td><code>created_date</code></td>
+<td>string</td>
+<td>Date the resource was created.</td>
+</tr>
+</tbody></table>
+<h2 id='the-checkout-item-object'>The (checkout) item object</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>product</code></td>
+<td>object</td>
+<td>The <a href="#the-product-object">product</a> being purchased.</td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td>string</td>
+<td>The quantity of the product being purchased.</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>string</td>
+<td>The amount of the checkout item being purchased.</td>
+</tr>
+<tr>
+<td><code>tax_id</code></td>
+<td>integer</td>
+<td>Unique identifier for the relevant tax for the checkout item.</td>
+</tr>
+<tr>
+<td><code>tax_amount</code></td>
+<td>string</td>
+<td>The amount of tax for the product being purchased.</td>
+</tr>
+<tr>
+<td><code>tax_status</code></td>
+<td>integer</td>
+<td>List of participant_lead objects</td>
+</tr>
+<tr>
+<td><code>tax_lines</code></td>
+<td>list</td>
+<td>List of <a href="#the-tax_line-object">tax_line</a> items</td>
+</tr>
+<tr>
+<td><code>reference</code></td>
+<td>list</td>
+<td></td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>integer</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='the-product-object'>The product object</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Unique identifier for the product.</td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td>string</td>
+<td>String representing the object&#39;s type. Value is product</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>The name of the product.</td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>string</td>
+<td>The price of the product.</td>
+</tr>
+<tr>
+<td><code>currency</code></td>
+<td>string</td>
+<td>ISO 4217 three-letter code.</td>
+</tr>
+</tbody></table>
+<h2 id='the-tax_line-object'>The tax_line object</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>amount</code></td>
+<td>integer</td>
+<td>The percentage amount of the tax.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>The name of the tax.</td>
+</tr>
+</tbody></table>
+<h2 id='create-a-checkout'>Create a checkout</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/checkouts?account<span class="o">=</span>17357980 <span class="se">\ </span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+    {
+      "checkout": {
+        "service": 30798101,
+        "payment_token": null,
+        "items": [
+          {
+            "product": {
+              "id": 30798131
+            },
+            "quantity": 1
+          }
+        ]
+      }
+    }
+  '</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30799601</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"buyer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17357980</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"World Conveyancing"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"created_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Date(1532940986653+0000)/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30798131</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kzi68b4 hosted rundl"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tax_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tax_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30734732</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tax_lines"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GST"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"tax_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"items_total_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"payment_account_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"credit_card"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"manual"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"payment_token"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"product_order"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"related"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"rundl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"seller"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">286896</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rundl Pty Ltd"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"service"</span><span class="p">:</span><span class="w"> </span><span class="mi">30798101</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"total_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"total_tax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Create a checkout for a product related to a service.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST   /checkouts?account={account_id}</code></p>
+<h3 id='query-parameters'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>The id of the selected account when starting the rundl</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request body</h3>
+<p>See example request.</p>
 <h1 id='rundls'>Rundls</h1><h2 id='overview'>Overview</h2>
 <p>A rundl is a shared digital space that brings together people and information around a business transaction.</p>
 <h2 id='the-rundl-object'>The rundl object</h2>
@@ -1585,7 +1954,7 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='start-a-rundl'>Start a rundl</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account<span class="o">=</span>123456 <span class="se">\ </span>
+<h2 id='start-a-rundl'>Start a rundl</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account<span class="o">=</span>123456&amp;checkout<span class="o">=</span>30798521&amp;payment_account<span class="o">=</span>30736909 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
@@ -1887,7 +2256,7 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 </span></code></pre>
 <p>Start a rundl based on a service. The user context starting the rundl must have permission to start rundls for the service. The chosen host must have permission to host rundls for the service.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST   /services/{service_id}/rundls?account={account_id}</code></p>
+<p><code>POST   /services/{service_id}/rundls?account={account_id}&amp;checkout={checkout}&amp;payment_account={payment_account}</code></p>
 <h3 id='query-parameters'>Query parameters</h3>
 <table><thead>
 <tr>
@@ -1898,6 +2267,14 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <tr>
 <td>account_id</td>
 <td>The id of the selected account when starting the rundl</td>
+</tr>
+<tr>
+<td>checkout</td>
+<td>The id of a checkout resource created for the purpose of the start rundl request</td>
+</tr>
+<tr>
+<td>payment_account</td>
+<td>The id of the payment account for the rundl host. The host will be charged the relevant host fee.</td>
 </tr>
 </tbody></table>
 <h3 id='path-parameters'>Path parameters</h3>
