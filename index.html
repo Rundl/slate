@@ -222,6 +222,11 @@
       <div id="toc" class="toc-list-h1">
           <li>
             <a href="#welcome" class="toc-h1 toc-link" data-title="Welcome">Welcome</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-an-account-for-api-access" class="toc-h2 toc-link" data-title="Create an account for API access">Create an account for API access</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#basics" class="toc-h1 toc-link" data-title="Basics">Basics</a>
@@ -383,40 +388,78 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='welcome'>Welcome</h1>
-<p>Welcome to the Rundl API reference. </p>
+<p>Welcome to the <strong>Rundl API</strong> reference. </p>
 
 <p>With the Rundl API you can connect your applications with the network of people, companies, services and data around you business processes. Create a collaborative community of your teams, customers and partners to bridge boundaries that constrain business processes. Find out more about process collaboration done the Rundl way <a href="https://rundl.com">here</a>.</p>
 
-<p>At Rundl we build our client apps on the same public API that we document here. That means we&#39;re committed to its ongoing development, making it feature rich, clean and consistent. We welcome you to leverage the Rundl API in your applications too. Please get in touch via <a href="mailto:support@rundl.com">support@rundl.com</a> if you need help, have questions or to get started.</p>
+<p>At Rundl we build our client apps on the same public API that we document here. That means we&#39;re committed to its ongoing development, making it feature rich, clean and consistent. We welcome you to leverage the Rundl API in your applications too. Please get in touch via <a href="mailto:support@rundl.com">support@rundl.com</a> if you need help or have questions about how to get started.</p>
 
 <aside class="notice">
-The Rundl API is currently in Beta. We add product features regularly. Also, patterns and techniques used in our API have evolved over a number of years, but are not yet evenly rolled out across all endpoints. We're working as fast as we can to complete a stable version. 
+The Rundl API is currently in beta. We add product features regularly. Also, patterns and techniques used in our API have evolved over a number of years, but are not yet evenly rolled out across all endpoints. We're working as fast as we can to complete a stable version. 
 </aside>
+<h2 id='create-an-account-for-api-access'>Create an account for API access</h2>
+<p>To begin, <a href="https://go.rundl.com/accounts/signup">sign up</a> to create a standard Rundl user account. </p>
+
+<p>After you create your user account, next <a href="https://support.rundl.com/hc/en-us/articles/204449317">create a group account</a>. Currently the API is only accessible with a Rundl group account.</p>
+
+<p>To learn more about using Rundl, visit our support site at <a href="https://support.rundl.com">https://support.rundl.com</a>.</p>
 <h1 id='basics'>Basics</h1><h2 id='rest-api'>REST API</h2>
 <p>The Rundl API is a RESTful Web API, providing programmatic access to resources representing relevant concepts on our platform. It includes URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.</p>
+
+<p>Contact <a href="mailto:support@rundl.com?subject=Register%20API%20client">support@rundl.com</a> to register for API access. Registration is currently a manual process. </p>
 <h2 id='event-subscriptions'>Event Subscriptions</h2>
 <p>Rundl Event Subscriptions is a callback solution that enables your application to be called when an event of interest occurs on the platform. The solution involves subscribing to particular event types, which are sent to a target service in your own infrastructure that you manage. </p>
 
 <p>An <a href="https://aws.amazon.com/sns/">AWS SNS topic</a> is our first target (we envisage a range of different targets in future, including a HTTP end-point). </p>
 
-<p>Contact support@rundl.com if you&#39;d like this service enabled on your account.</p>
+<p>Contact <a href="mailto:support@rundl.com?subject=Subscribe%20to%20Rundl%20Events">support@rundl.com</a> to subscribe to Rundl Events. Subscription is currently a manual process. </p>
 
 <p>Rundl will trigger sending events in 10 second intervals.</p>
 <h2 id='embedded-apps'>Embedded Apps</h2>
-<p>Embed your custom HTML5 web app in an iframe container on Rundl&#39;s web app at https://go.rundl.com for presentation layer integration.</p>
+<p>You can embed your custom HTML web app in an iframe container that&#39;s loaded in our web app. Your app can load in a sidebar within a rundl for presentation layer integration of your app. </p>
 
-<p>An embedded app is provided OAuth credentials upon registration, and is configured with an HTTP end-point where the app resides. When a request is made to load your app a signed request that is sent that can be used to verify the authenticty of the request and includes information that allows you to establish a session for a user when further interactions with the Rundl REST API is required. </p>
+<p>An embedded app gets unique OAuth credentials upon registration, and is configured with an HTTP end-point where your embedded app resides, and your public key. Contact <a href="mailto:support@rundl.com?subject=Register%20Embedded%20app">support@rundl.com</a> to register an embedded app. Registration is currently a manual process. Please provide the url for your app and your public key.</p>
+
+<p>After we&#39;ve registered your app, you can link to it using the following internal link format in a rundl message, comment or step description:</p>
+
+<p><code>[Your embedded page link](!{rundl.id},addon_embeddedpage,your_app_id)</code></p>
+
+<p>Our web app will automatically resolve this link in Rundl activity as:</p>
+
+<p><code>&lt;a href=&quot;https://stage-go.rundl.com/rundls/123456?sb=addon_embeddedpage&amp;sb_app=123456&quot;&gt;Your embedded page link&lt;/a&gt;</code></p>
+
+<blockquote>
+<p>The token will include a JWT structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"app_data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{</span><span class="se">\"</span><span class="s2">account_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">123456</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">rundl_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">123456</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NnlNIO1B3OiigddIXEkGWHvhVKBESWNFTGQHxbZzJCnSA"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"algorithm"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"nbf"</span><span class="p">:</span><span class="w"> </span><span class="mi">1542698558</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1574234558</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1542698558</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stage-go.rundl.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-example-uri.com/some-path"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When a rundl participant clicks the link, our web app will send a GET request to your HTTP end-point with a JWT sent in the <code>token</code> url parameter. </p>
+
+<p><code>https://your-example-uri.com/some-path?token=&lt;JWT&gt;</code></p>
+
+<p>The JWT is signed and can be used to verify the authenticty of the request. The JWT also includes information that allows you to establish a session for a user when further interactions with the Rundl REST API are required. </p>
+
+<p>Your end-point should return valid HTML that will be loaded in the iframe.</p>
 <h2 id='environments'>Environments</h2>
-<p>The API can be accessed from our test and live environments:</p>
+<p>The API can be accessed from our staging and live environments:</p>
 
-<p><code>https://test-go.rundl.com/api</code></p>
+<p><code>https://stage-go.rundl.com/api</code></p>
 
 <p><code>https://go.rundl.com/api</code></p>
 
-<p>Initially we&#39;ll give you access to our test environment to start your integration with Rundl. Upon request, we&#39;ll supply an integration key/secret for your application in our test environment. </p>
+<p>Initially we&#39;ll give you access to our staging environment to start your integration with Rundl. Request to register an app and we&#39;ll supply an integration key/secret for your application in our staging environment.</p>
 
 <aside class="notice">
-As you'll first need access to our test environment, this documentation uses https://test-go.rundl.com in the examples. After you've developed you app or integration, we'll need to review and approve it before distributing a client secret that will allow you to make requests in our live environment, https://go.rundl.com.
+As you'll first get API access in our staging environment, this documentation uses https://stage-go.rundl.com in examples. After you've developed you app or integration, we'll need to review and approve it before distributing a client secret that will allow you to make requests in our live environment, https://go.rundl.com.
 </aside>
 <h2 id='authorisation-and-security'>Authorisation and security</h2>
 <p>You can authorise against the API using an OAuth2 access token. OAuth2 tokens are acquired programmatically and issuing tokens requires authentication. <a href="#authentication">Read more</a> about Authentication below.</p>
@@ -442,9 +485,9 @@ As you'll first need access to our test environment, this documentation uses htt
 <blockquote>
 <p>To specify the number of items in a list, use the count query parameter:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl https://test-go.rundl.com/api/activity?account<span class="o">=</span>123456&amp;count<span class="o">=</span>12 <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl https://stage-go.rundl.com/api/activity?account<span class="o">=</span>123456&amp;count<span class="o">=</span>12 <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span>
 </code></pre>
 <p>In the Rundl API you&#39;ll come across list endpoints, like lists of activity, rundls, services or reminders. </p>
 
@@ -459,8 +502,8 @@ As you'll first need access to our test environment, this documentation uses htt
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"next"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">test-go.rundl.com</span><span class="se">\/</span><span class="s2">api</span><span class="se">\/</span><span class="s2">activity?account=123456&amp;cursor=9a0c1d45d46"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"previous"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">test-go.rundl.com</span><span class="se">\/</span><span class="s2">api</span><span class="se">\/</span><span class="s2">activity?account=123456&amp;cursor=f5d8f4e51aa"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"next"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">stage-go.rundl.com</span><span class="se">\/</span><span class="s2">api</span><span class="se">\/</span><span class="s2">activity?account=123456&amp;cursor=9a0c1d45d46"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"previous"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">stage-go.rundl.com</span><span class="se">\/</span><span class="s2">api</span><span class="se">\/</span><span class="s2">activity?account=123456&amp;cursor=f5d8f4e51aa"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"strategy"</span><span class="p">:</span><span class="mi">2</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -496,9 +539,9 @@ As you'll first need access to our test environment, this documentation uses htt
 <blockquote>
 <p>To retrieve related objects as part of a single request, use the expand query parameter:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl https://test-go.rundl.com/api/messages/23420341?account<span class="o">=</span>123456&amp;context_mode<span class="o">=</span>insensitive&amp;expand<span class="o">=</span>comments%2Clinks%2Cfiles%2Creminders <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl https://stage-go.rundl.com/api/messages/23420341?account<span class="o">=</span>123456&amp;context_mode<span class="o">=</span>insensitive&amp;expand<span class="o">=</span>comments%2Clinks%2Cfiles%2Creminders <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span>
 </code></pre>
 <blockquote>
 <p>The above request returns an expanded message object as part of the response (example json truncated for brevity):</p>
@@ -569,14 +612,14 @@ As you'll first need access to our test environment, this documentation uses htt
 <h2 id='errors'>Errors</h2>
 <p>The API policy is to return a relevant HTTP Error code with an error description.</p>
 <h1 id='authentication'>Authentication</h1>
-<p>Each request to the Rundl API must be authenticated. When you register your application we&#39;ll assign it OAuth credentials and send them to you.</p>
-
-<p>Rundl uses OAuth to provide authorised access to resources via its API. OAuth has a number of benefits:</p>
+<p>Each request to the Rundl API must be authenticated. Rundl uses OAuth to provide authorised access to resources via its API. OAuth has a number of benefits:</p>
 
 <ul>
 <li>Users are not required to share their passwords with third party applications.</li>
 <li>Standard libraries available in most application frameworks.</li>
 </ul>
+
+<p>When you register your application we assign it OAuth credentials and send them to you. Contact <a href="mailto:support@rundl.com?subject=Register%20API%20client">support@rundl.com</a> to register for API access. Registration is currently a manual process.</p>
 <h2 id='application-authentication-flow-with-oauth'>Application authentication flow with OAuth</h2>
 <p>A client application can directly request an access token from the Authorization server by using the client&#39;s id and secret to authenticate. The token will represent the client application (instead of a user). Our implementation is modelled on the <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials Grant</a> flow in the OAuth 2 spec.</p>
 
@@ -586,7 +629,7 @@ As you'll first need access to our test environment, this documentation uses htt
 <li>Machine-to-machine calls without the intervention of a user</li>
 <li>Non-user-centric API calls</li>
 </ul>
-<h3 id='step-1-get-client-access-token'>Step 1: Get client access token</h3><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/client_tokens <span class="se">\</span>
+<h3 id='step-1-get-client-access-token'>Step 1: Get client access token</h3><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/oauth/client_tokens <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --data <span class="s1">'
     {
@@ -668,7 +711,7 @@ As you'll first need access to our test environment, this documentation uses htt
 <blockquote>
 <p>To get a client access token, passing the credentials in the header:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/client_tokens <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/oauth/client_tokens <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: Basic &lt;Base64-Encoded-ClientId-Colon-ClientSecret&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
@@ -705,7 +748,7 @@ Instead of passing the client_id and client_secret values as query parameters in
 <h3 id='step-1-redirect-users-to-the-rundl-authorisation-page'>Step 1: Redirect users to the Rundl authorisation page</h3>
 <p>Send your users to the Rundl authorisation page. </p>
 
-<p><code>https://test-go.rundl.com/oauth/authorize</code></p>
+<p><code>https://stage-go.rundl.com/oauth/authorize</code></p>
 
 <p>Pass the following query parameters:</p>
 
@@ -725,7 +768,7 @@ Instead of passing the client_id and client_secret values as query parameters in
 </tr>
 <tr>
 <td><code>redirect_uri</code></td>
-<td>The URI in your application where users get sent after a user decides to log in to your application. If not supplied, user will be redirected to https://test-go.rundl.com/dashboard.</td>
+<td>The URI in your application where users get sent after a user decides to log in to your application. If not supplied, user will be redirected to https://stage-go.rundl.com/dashboard.</td>
 </tr>
 <tr>
 <td><code>scope</code></td>
@@ -772,7 +815,7 @@ Currently Rundl's OAuth implementation supports a user implicitly granting your 
 <td>Optional parameter passing through the intent of the user for the session length. Support for this will be dropped once refresh token support is added. Your app will be able to implement its own session length strategy.</td>
 </tr>
 </tbody></table>
-<h3 id='step-3-get-user-access-token-from-rundl'>Step 3: Get user access token from Rundl</h3><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
+<h3 id='step-3-get-user-access-token-from-rundl'>Step 3: Get user access token from Rundl</h3><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   --data <span class="s1">'
@@ -870,7 +913,7 @@ Currently Rundl's OAuth implementation supports a user implicitly granting your 
 <blockquote>
 <p>To get a user access token, passing the credentials in the header:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: Basic &lt;Base64-Encoded-ClientId-Colon-ClientSecret&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
@@ -887,7 +930,7 @@ Instead of passing the client_id and client_secret values as query parameters in
 <h3 id='step-4-use-the-access-token'>Step 4: Use the access token</h3>
 <p>Your application is now authorised to make calls to the Rundl API, to access protected resources on behalf of the authenticated user, by passing the access token in the Authorization header.</p>
 
-<p><code>Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;</code></p>
+<p><code>Authorization: OAuth &lt;User-Access-Token&gt;</code></p>
 
 <p>See REST API method reference for information about the the available resources.</p>
 <h2 id='user-authentication-flow-with-jwt'>User authentication flow with JWT</h2>
@@ -1094,7 +1137,7 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <blockquote>
 <p>To get a user access token, passing the JWT in the header:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
+<pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: JWT &lt;jwt&gt; \
   --data '</span>
@@ -1229,9 +1272,9 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='order-a-service'>Order a service</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/orders?account<span class="o">=</span>123456 <span class="se">\</span>
+<h2 id='order-a-service'>Order a service</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/orders?account<span class="o">=</span>123456 <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
     {
       "order": {
@@ -1458,9 +1501,9 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <td>Server allocated token identifying the upload session.</td>
 </tr>
 </tbody></table>
-<h2 id='create-an-upload_session'>Create an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/files/upload_sessions?account<span class="o">=</span>123456 <span class="se">\</span>
+<h2 id='create-an-upload_session'>Create an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/files/upload_sessions?account<span class="o">=</span>123456 <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
     {
       "fileUploadSession": {
@@ -1504,9 +1547,9 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <td>The id of the selected account when uploading the file</td>
 </tr>
 </tbody></table>
-<h2 id='update-an-upload_session'>Update an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://test-go.rundl.com/api/files/upload_sessions/d419b96c-b320-4088-b66a-7b7706cfdc57?account<span class="o">=</span>123456 <span class="se">\</span>
+<h2 id='update-an-upload_session'>Update an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://stage-go.rundl.com/api/files/upload_sessions/d419b96c-b320-4088-b66a-7b7706cfdc57?account<span class="o">=</span>123456 <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
     {
       "fileUploadSession": {
@@ -1754,7 +1797,7 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <td>The name of the tax.</td>
 </tr>
 </tbody></table>
-<h2 id='create-a-checkout'>Create a checkout</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/checkouts?account<span class="o">=</span>17357980 <span class="se">\ </span>
+<h2 id='create-a-checkout'>Create a checkout</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/checkouts?account<span class="o">=</span>17357980 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
@@ -1954,9 +1997,9 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='start-a-rundl'>Start a rundl</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://test-go.rundl.com/api/services/24415244/rundls?account<span class="o">=</span>123456&amp;checkout<span class="o">=</span>30798521&amp;payment_account<span class="o">=</span>30736909 <span class="se">\ </span>
+<h2 id='start-a-rundl'>Start a rundl</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/services/24415244/rundls?account<span class="o">=</span>123456&amp;checkout<span class="o">=</span>30798521&amp;payment_account<span class="o">=</span>30736909 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
       {
       "rundl":{
@@ -2349,9 +2392,9 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 <td>Message included in invitation email when adding a participant.</td>
 </tr>
 </tbody></table>
-<h2 id='add-a-rundl-participant'>Add a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://test-go.rundl.com/api/rundls/123456/participants?account<span class="o">=</span>123456 <span class="se">\ </span>
+<h2 id='add-a-rundl-participant'>Add a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://stage-go.rundl.com/api/rundls/123456/participants?account<span class="o">=</span>123456 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
       {
         "participant":{
@@ -2407,9 +2450,9 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
 </tbody></table>
 <h3 id='request-body'>Request body</h3>
 <p>See example request.</p>
-<h2 id='update-a-rundl-participant'>Update a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://test-go.rundl.com/api/rundls/123456/participants/25577359?account<span class="o">=</span>123456 <span class="se">\ </span>
+<h2 id='update-a-rundl-participant'>Update a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://stage-go.rundl.com/api/rundls/123456/participants/25577359?account<span class="o">=</span>123456 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: OAuth &lt;Base64-Encoded-User-Access-Token&gt;'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
       {
         "participant":{
