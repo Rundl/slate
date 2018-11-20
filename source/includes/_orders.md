@@ -27,9 +27,9 @@ Attribute | Type | Description
 ## Order a service
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/orders?account=123456 \
+curl -X POST https://stage-go.rundl.com/api/orders?account=123456 \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
+  --header 'Authorization: OAuth <User-Access-Token>' \
   --data '
     {
       "order": {

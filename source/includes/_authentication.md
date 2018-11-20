@@ -1,11 +1,11 @@
 # Authentication
 
-Each request to the Rundl API must be authenticated. When you register your application we'll assign it OAuth credentials and send them to you.
-
-Rundl uses OAuth to provide authorised access to resources via its API. OAuth has a number of benefits:
+Each request to the Rundl API must be authenticated. Rundl uses OAuth to provide authorised access to resources via its API. OAuth has a number of benefits:
 
 - Users are not required to share their passwords with third party applications.
 - Standard libraries available in most application frameworks.
+
+ When you register your application we assign it OAuth credentials and send them to you. Contact [support@rundl.com](mailto:support@rundl.com?subject=Register API client) to register for API access. Registration is currently a manual process.
 
 ## Application authentication flow with OAuth
 
@@ -19,7 +19,7 @@ This flow is useful in the following cases:
 ### Step 1: Get client access token
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/oauth/client_tokens \
+curl -X POST https://stage-go.rundl.com/api/oauth/client_tokens \
   --header 'Content-Type: application/json' \
   --data '
     {
@@ -66,7 +66,7 @@ Code | Description
 > To get a client access token, passing the credentials in the header:
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/oauth/client_tokens \
+curl -X POST https://stage-go.rundl.com/api/oauth/client_tokens \
   --header 'Content-Type: application/json' \
   --header 'Authorization: Basic <Base64-Encoded-ClientId-Colon-ClientSecret>' \
   --data '
@@ -109,7 +109,7 @@ Every time your application makes an API call it will be issued on behalf of the
 
 Send your users to the Rundl authorisation page. 
 
-`https://test-go.rundl.com/oauth/authorize`
+`https://stage-go.rundl.com/oauth/authorize`
 
 Pass the following query parameters:
 
@@ -117,7 +117,7 @@ Parameter | Description
 --------- | -----------
 `response_type` | Options: `code` (default) Authorization code grant flow is the only user authorised grant type currently supported.
 `client_id` | The client id you received from Rundl when registering your application.
-`redirect_uri` | The URI in your application where users get sent after a user decides to log in to your application. If not supplied, user will be redirected to https://test-go.rundl.com/dashboard.
+`redirect_uri` | The URI in your application where users get sent after a user decides to log in to your application. If not supplied, user will be redirected to https://stage-go.rundl.com/dashboard.
 `scope` | *Not implemented.*
 `state` | *Not implemented.*
 
@@ -145,7 +145,7 @@ Parameter | Description
 ### Step 3: Get user access token from Rundl
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/oauth/access_tokens \
+curl -X POST https://stage-go.rundl.com/api/oauth/access_tokens \
   --header 'Content-Type: application/json' \
   --header 'Accept: application/json' \
   --data '
@@ -199,7 +199,7 @@ Code | Description
 > To get a user access token, passing the credentials in the header:
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/oauth/access_tokens \
+curl -X POST https://stage-go.rundl.com/api/oauth/access_tokens \
   --header 'Content-Type: application/json' \
   --header 'Authorization: Basic <Base64-Encoded-ClientId-Colon-ClientSecret>' \
   --data '
@@ -219,7 +219,7 @@ Instead of passing the client_id and client_secret values as query parameters in
 
 Your application is now authorised to make calls to the Rundl API, to access protected resources on behalf of the authenticated user, by passing the access token in the Authorization header.
 
-`Authorization: OAuth <Base64-Encoded-User-Access-Token>`
+`Authorization: OAuth <User-Access-Token>`
 
 See REST API method reference for information about the the available resources.
 
@@ -339,7 +339,7 @@ Claim | Type | Description | Sample
 > To get a user access token, passing the JWT in the header:
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/oauth/access_tokens \
+curl -X POST https://stage-go.rundl.com/api/oauth/access_tokens \
   --header 'Content-Type: application/json' \
   --header 'Authorization: JWT <jwt> \
   --data '

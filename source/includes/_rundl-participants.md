@@ -30,9 +30,9 @@ Attribute | Description
 ## Add a rundl participant
 
 ```shell
-curl -X PUT https://test-go.rundl.com/api/rundls/123456/participants?account=123456 \ 
+curl -X PUT https://stage-go.rundl.com/api/rundls/123456/participants?account=123456 \ 
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
+  --header 'Authorization: OAuth <User-Access-Token>' \
   --data '
       {
         "participant":{
@@ -87,9 +87,9 @@ See example request.
 ## Update a rundl participant
 
 ```shell
-curl -X PUT https://test-go.rundl.com/api/rundls/123456/participants/25577359?account=123456 \ 
+curl -X PUT https://stage-go.rundl.com/api/rundls/123456/participants/25577359?account=123456 \ 
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
+  --header 'Authorization: OAuth <User-Access-Token>' \
   --data '
       {
         "participant":{

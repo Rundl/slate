@@ -4,35 +4,70 @@
 
 The Rundl API is a RESTful Web API, providing programmatic access to resources representing relevant concepts on our platform. It includes URLs to access resources, leveraging built-in HTTP features to handle requests and return responses.
 
+Contact [support@rundl.com](mailto:support@rundl.com?subject=Register API client) to register for API access. Registration is currently a manual process. 
+
 ## Event Subscriptions
 
 Rundl Event Subscriptions is a callback solution that enables your application to be called when an event of interest occurs on the platform. The solution involves subscribing to particular event types, which are sent to a target service in your own infrastructure that you manage. 
 
 An [AWS SNS topic](https://aws.amazon.com/sns/) is our first target (we envisage a range of different targets in future, including a HTTP end-point). 
 
-Contact support@rundl.com if you'd like this service enabled on your account.
+Contact [support@rundl.com](mailto:support@rundl.com?subject=Subscribe to Rundl Events) to subscribe to Rundl Events. Subscription is currently a manual process. 
 
 Rundl will trigger sending events in 10 second intervals.
 
 ## Embedded Apps
 
-Embed your custom HTML5 web app in an iframe container on Rundl's web app at https://go.rundl.com for presentation layer integration.
+You can embed your custom HTML web app in an iframe container that's loaded in our web app. Your app can load in a sidebar within a rundl for presentation layer integration of your app. 
 
-An embedded app is provided OAuth credentials upon registration, and is configured with an HTTP end-point where the app resides. When a request is made to load your app a signed request that is sent that can be used to verify the authenticty of the request and includes information that allows you to establish a session for a user when further interactions with the Rundl REST API is required. 
+An embedded app gets unique OAuth credentials upon registration, and is configured with an HTTP end-point where your embedded app resides, and your public key. Contact [support@rundl.com](mailto:support@rundl.com?subject=Register Embedded app) to register an embedded app. Registration is currently a manual process. Please provide the url for your app and your public key.
+
+After we've registered your app, you can link to it using the following internal link format in a rundl message, comment or step description:
+
+`[Your embedded page link](!{rundl.id},addon_embeddedpage,your_app_id)`
+
+Our web app will automatically resolve this link in Rundl activity as:
+
+`<a href="https://stage-go.rundl.com/rundls/123456?sb=addon_embeddedpage&sb_app=123456">Your embedded page link</a>`
+
+> The token will include a JWT structured like this:
+
+```json
+{
+  "app_data": "{\"account_id\":\"123456\",\"rundl_id\":\"123456\"}",
+  "code": "NnlNIO1B3OiigddIXEkGWHvhVKBESWNFTGQHxbZzJCnSA",
+  "algorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512",
+  "nbf": 1542698558,
+  "exp": 1574234558,
+  "iat": 1542698558,
+  "iss": "stage-go.rundl.com",
+  "aud": "https://your-example-uri.com/some-path"
+}
+```
+
+When a rundl participant clicks the link, our web app will send a GET request to your HTTP end-point with a JWT sent in the `token` url parameter. 
+
+`https://your-example-uri.com/some-path?token=<JWT>`
+
+The JWT is signed and can be used to verify the authenticty of the request. The JWT also includes information that allows you to establish a session for a user when further interactions with the Rundl REST API are required. 
+
+Your end-point should return valid HTML that will be loaded in the iframe.
 
 ## Environments
 
-The API can be accessed from our test and live environments:
+The API can be accessed from our staging and live environments:
 
-`https://test-go.rundl.com/api`
+`https://stage-go.rundl.com/api`
 
 `https://go.rundl.com/api`
 
-Initially we'll give you access to our test environment to start your integration with Rundl. Upon request, we'll supply an integration key/secret for your application in our test environment. 
+Initially we'll give you access to our staging environment to start your integration with Rundl. Request to register an app and we'll supply an integration key/secret for your application in our staging environment.
 
 <aside class="notice">
-As you'll first need access to our test environment, this documentation uses https://test-go.rundl.com in the examples. After you've developed you app or integration, we'll need to review and approve it before distributing a client secret that will allow you to make requests in our live environment, https://go.rundl.com.
+As you'll first get API access in our staging environment, this documentation uses https://stage-go.rundl.com in examples. After you've developed you app or integration, we'll need to review and approve it before distributing a client secret that will allow you to make requests in our live environment, https://go.rundl.com.
 </aside>
+
+
 
 ## Authorisation and security
 
@@ -69,9 +104,9 @@ Rundl does not currently apply rate limiting. We do log all API requests and mon
 > To specify the number of items in a list, use the count query parameter:
 
 ```shell
-curl https://test-go.rundl.com/api/activity?account=123456&count=12 \
+curl https://stage-go.rundl.com/api/activity?account=123456&count=12 \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>'
+  --header 'Authorization: OAuth <User-Access-Token>'
 ```
 
 In the Rundl API you'll come across list endpoints, like lists of activity, rundls, services or reminders. 
@@ -87,8 +122,8 @@ By default most list endpoints return a maximum of 100 items per page. However, 
   ],
   "object":"list",
   "paging":{
-    "next":"https:\/\/test-go.rundl.com\/api\/activity?account=123456&cursor=9a0c1d45d46",
-    "previous":"https:\/\/test-go.rundl.com\/api\/activity?account=123456&cursor=f5d8f4e51aa",
+    "next":"https:\/\/stage-go.rundl.com\/api\/activity?account=123456&cursor=9a0c1d45d46",
+    "previous":"https:\/\/stage-go.rundl.com\/api\/activity?account=123456&cursor=f5d8f4e51aa",
     "strategy":2
   }
 }
@@ -113,9 +148,9 @@ Parameter | Description
 > To retrieve related objects as part of a single request, use the expand query parameter:
 
 ```shell
-curl https://test-go.rundl.com/api/messages/23420341?account=123456&context_mode=insensitive&expand=comments%2Clinks%2Cfiles%2Creminders \
+curl https://stage-go.rundl.com/api/messages/23420341?account=123456&context_mode=insensitive&expand=comments%2Clinks%2Cfiles%2Creminders \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>'
+  --header 'Authorization: OAuth <User-Access-Token>'
 ```
 
 > The above request returns an expanded message object as part of the response (example json truncated for brevity):

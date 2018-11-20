@@ -32,9 +32,9 @@ Attribute | Type | Description
 ## Create an upload_session
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/files/upload_sessions?account=123456 \
+curl -X POST https://stage-go.rundl.com/api/files/upload_sessions?account=123456 \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
+  --header 'Authorization: OAuth <User-Access-Token>' \
   --data '
     {
       "fileUploadSession": {
@@ -81,9 +81,9 @@ account_id | The id of the selected account when uploading the file
 ## Update an upload_session
 
 ```shell
-curl -X PUT https://test-go.rundl.com/api/files/upload_sessions/d419b96c-b320-4088-b66a-7b7706cfdc57?account=123456 \
+curl -X PUT https://stage-go.rundl.com/api/files/upload_sessions/d419b96c-b320-4088-b66a-7b7706cfdc57?account=123456 \
   --header 'Content-Type: application/json' \
-  --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
+  --header 'Authorization: OAuth <User-Access-Token>' \
   --data '
     {
       "fileUploadSession": {

@@ -60,7 +60,7 @@ Attribute | Type | Description
 ## Create a checkout
 
 ```shell
-curl -X POST https://test-go.rundl.com/api/checkouts?account=17357980 \ 
+curl -X POST https://stage-go.rundl.com/api/checkouts?account=17357980 \ 
   --header 'Content-Type: application/json' \
   --header 'Authorization: OAuth <Base64-Encoded-User-Access-Token>' \
   --data '
