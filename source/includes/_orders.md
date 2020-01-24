@@ -2,27 +2,26 @@
 
 ## Overview
 
-Take control of acquiring new customers and starting transactional work. Service providers can offer services to their customers and referral partners and track opportunities sent as orders.
+Receive new orders for transactional work. Service providers can offer services to their customers and referral partners and track opportunities sent as orders.
 
 ## The order object
 
 Attribute | Type | Description
 --------- | ------- | -----------
 `id` | integer | Unique identifier for the order.
-`service` | integer | Unique identifier for the service being ordered.
-`subject` | string | Summary of the order.
+`summary` | string | Summary of the order.
 `detail` | string | Details about the order, such as a message or description.
-`sender` | object | Sender of the order as a participant_lead object.
-`participant_leads` | list | List of participant_lead objects
-`files` | list | List of Rundl file identifiers. Stage files on auth user's account via the files API prior to sending the order.
-`status` | integer | Status of the order. See approval states reference.
-`referral_fee` | string | Referral fee currency amount payable to the sender.
-`referral_fee_currency` | string | Three-letter ISO currency code. Currently only AUD supported.
-`source` | object | Information about the source of the order.
-`rundl` | object | Information about the rundl to create when accepting an order.
-`request_id` | integer | The unique identifier of the related request. Currently orders are coupled with requests. This will soon be deprecated and orders will stand alone.
+`sender` | object | Order sender as a participant object. Only returned in responses. Use participants attribute when creating orders.
+`receiver` | object | Order receiver as a participant object. Only returned in responses. Automaticallay assiged after creating orders.
+`referrer` | object | Order referrer as a participant object. Only returned in responses. Automaticallay assiged after creating orders. See referrer_code attribute.
+`state` | object | Status of the order. See approval states reference.
+`referrer_code` | string | Code to identify the order referrer.
+`rundl` | object | Information about the rundl that's started when accepting an order. Each order has an associated preliminary rundl to support collaboration on the order.
+`service` | object | Identifies the service being ordered.
 `metadata` | object | Context information related to the order
-`version` | integer | 	
+`participants` | list | List of participants. Not returned in responses. Attribute only support supplying participants when creating orders.
+`fields` | list | List of fields. Not returned in responses. Attribute only support supplying custom field data when creating orders.
+`actions` | list | List of actions for additional operations on the order. e.g. to associate optional Files or a Real Property where Rundl Property AU addon is enabled for the service.
 
 ## Order a service
 
@@ -33,23 +32,40 @@ curl -X POST https://stage-go.rundl.com/api/orders?account=123456 \
   --data '
     {
       "order": {
-        "service":23225632,
-        "subject":"123 Baker St Caulfield (Demo)",
-        "detail":"Sale of property at 123 Baker St Caulfield Vic 3126 ",
-        "sender":{
-          "context":873900,
-          "roles":["Seller"],
-          "person":{"id":873900}
+        "service":{
+          "id":23225632
         },
-        "participant_leads":[
+        "summary":"123 Baker St Caulfield (Demo)",
+        "detail":"Sale of property at 123 Baker St Caulfield Vic 3126 ",
+        "participants":[
           {
-            "person":{
+            "categories": ["sender"],
+            "context":{
+              "id":574997
+            },
+            "roles":["Seller"]
+          },
+          {
+            "contact": {
               "first_name":"Rod",
               "surname":"Montford",
-              "email":"rmontford@gmail.com",
+              "email":"rmontford@email.com",
               "mobile":"+61412356789"
             },
             "roles":["Seller"]
+          }
+        ],
+        "actions":[
+          {
+            "name":"add",
+            "id":123456,
+            "object":"file"
+          },
+          {
+            "name":"add",
+            "id":123456,
+            "data":"{\"id\":123456,\"version\":1}",
+            "object":"realproperty"
           }
         ]
       }
@@ -57,107 +73,29 @@ curl -X POST https://stage-go.rundl.com/api/orders?account=123456 \
   '
 ```
 
-> The above command returns JSON structured like this:
+> The above command returns JSON structured like this (some objects truncated for brevity):
 
 ```json
 {
-  "detail":"Sale of property at 123 Baker St Caulfield Vic 3126 ",
-  "files":null,
-  "id":23226946,
-  "metadata":{
-    "created_context":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":873900,
-      "name":"Zoe Montford",
-      "parent":null,
-      "profile_icon_url":null,
-      "video_id":null
-    },
-    "created_date":"\/Date(1513314441677+0000)\/",
-    "created_user":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":873900,
-      "name":"Zoe Montford",
-      "parent":null,
-      "profile_icon_url":"https:\/\/secure.gravatar.com\/avatar\/e7392fe26191f428e9a8e8f7d9aee55c",
-      "video_id":null
-    },
-    "id":23226946,
-    "updated_context":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":873900,
-      "name":"Zoe Montford",
-      "parent":null,
-      "profile_icon_url":null,
-      "video_id":null
-    },
-    "updated_date":"\/Date(1513314441677+0000)\/",
-    "updated_user":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":873900,
-      "name":"Zoe Montford",
-      "parent":null,
-      "profile_icon_url":"https:\/\/secure.gravatar.com\/avatar\/e7392fe26191f428e9a8e8f7d9aee55c",
-      "video_id":null
-    }
-  },
-  "participant_leads":[
-    {
-      "context":null,
-      "id":23226951,
-      "person":{
-        "email":"rmontford@gmail.com",
-        "first_name":"Rod",
-        "id":null,
-        "mobile":"+61 412 356 789",
-        "surname":"Montford"
-      },
-      "roles":[
-        "Seller"
-      ],
-      "subscribe":null
-    }
-  ],
-  "referral_fee":null,
-  "referral_fee_currency":"AUD",
-  "request_id":23226952,
+  "id":42704777,
+  "object":"order",
+  "version":1,
+  "version_latest":null,
+  "detail":"123 Baker St Caulfield Vic 3126",
+  "metadata":{ ... },
+  "receiver":{ ... },
+  "referrer":{ ... },
+  "referrer_code":"yzfZxGNL",
   "rundl":null,
-  "sender":{
-    "context":873900,
-    "id":23226950,
-    "person":{
-      "email":null,
-      "first_name":null,
-      "id":873900,
-      "mobile":null,
-      "surname":null
-    },
-    "roles":[
-      "Seller"
-    ],
-    "subscribe":null
-  },
-  "service":23225632,
-  "source":null,
-  "status":0,
-  "subject":"123 Baker St Caulfield (Demo)",
-  "version":1
+  "sender":{ ...},
+  "service":{ ... },
+  "state":{ ... },
+  "summary":"Sale of property at 123 Baker St Caulfield Vic 3126"
 }
 ```
 
 Order a service from a Rundl service provider. The user context sending the order must have permission to order the service. Service settings control which contexts can order.
+Example shows optional actions to attach additional resources such as files or a realproperty.
 
 ### HTTP Request
 
@@ -168,6 +106,7 @@ Order a service from a Rundl service provider. The user context sending the orde
 Parameter | Description
 --------- | -----------
 account_id | The id of the selected account when ordering the service
+referrer_code | A code that can be associated with the order. If the code (stored in Rundl against a contact) is assigned a context, the context will be added to the order as referrer.
 
 ### Request body
 

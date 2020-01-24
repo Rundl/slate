@@ -17,6 +17,7 @@ includes:
   - checkouts
   - rundls
   - rundl-participants
+  - real-estate
 
 search: true
 ---

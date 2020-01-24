@@ -26,20 +26,22 @@ Attribute | Type | Description
 `hash` | string | MD5 file hash.
 `publish` | boolean | Publish immediately on upload success.
 `size` | integer | File size in bytes.
+`sstatus` | string | The session status.
 `upload_token` | string | Server allocated token identifying the upload session.
 
 
 ## Create an upload_session
 
 ```shell
-curl -X POST https://stage-go.rundl.com/api/files/upload_sessions?account=123456 \
+curl -X POST https://stage-go.rundl.com/api/files/uploadsession?account=123456 \
   --header 'Content-Type: application/json' \
   --header 'Authorization: OAuth <User-Access-Token>' \
   --data '
     {
-      "fileUploadSession": {
+      "upload_session": {
         "filename": logo.png,
         "size": 15992,
+        "publish": false
       }
     }
   '
@@ -61,6 +63,7 @@ curl -X POST https://stage-go.rundl.com/api/files/upload_sessions?account=123456
   "hash":null,
   "publish":false,
   "size":15992,
+  "status": "pending",
   "upload_token":"d419b96c-x111-1111-x11y-7b7706cfdc57",
 }
 ```
@@ -69,7 +72,7 @@ Create an upload session prior to uploading a file. The upload session will retu
 
 ### HTTP Request
 
-`POST	/files/upload_sessions?account={account_id}`
+`POST	/files/uploadsession?account={account_id}`
 
 ### Query parameters
 
@@ -81,12 +84,12 @@ account_id | The id of the selected account when uploading the file
 ## Update an upload_session
 
 ```shell
-curl -X PUT https://stage-go.rundl.com/api/files/upload_sessions/d419b96c-b320-4088-b66a-7b7706cfdc57?account=123456 \
+curl -X PATCH https://stage-go.rundl.com/api/files/uploadsession/d419b96c-b320-4088-b66a-7b7706cfdc57?account=123456 \
   --header 'Content-Type: application/json' \
   --header 'Authorization: OAuth <User-Access-Token>' \
   --data '
     {
-      "fileUploadSession": {
+      "upload_session": {
         "aws_access_key":"ASIAJAY...WXXTCA",
         "aws_bucket":"uploadsdevrundlco",
         "aws_region":"ap-southeast-2",
@@ -98,6 +101,7 @@ curl -X PUT https://stage-go.rundl.com/api/files/upload_sessions/d419b96c-b320-4
         "filename":"logo.png",
         "publish":false,
         "size":15992,
+        "status": "uploaded",
         "upload_token":"d419b96c-x111-1111-x11y-7b7706cfdc57",
       }
     }
