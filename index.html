@@ -281,9 +281,6 @@
                   <li>
                     <a href="#user-authentication-flow-with-oauth" class="toc-h2 toc-link" data-title="User authentication flow with OAuth">User authentication flow with OAuth</a>
                   </li>
-                  <li>
-                    <a href="#user-authentication-flow-with-jwt" class="toc-h2 toc-link" data-title="User authentication flow with JWT">User authentication flow with JWT</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -649,7 +646,9 @@ As you'll first get API access in our staging environment, this documentation us
 </ul>
 
 <p>When you register your application we assign it OAuth credentials and send them to you. Contact <a href="mailto:support@rundl.com?subject=Register%20API%20client">support@rundl.com</a> to register for API access. Registration is currently a manual process.</p>
+
 <h2 id='application-authentication-flow-with-oauth'>Application authentication flow with OAuth</h2>
+
 <p>A client application can directly request an access token from the Authorization server by using the client&#39;s id and secret to authenticate. The token will represent the client application (instead of a user). Our implementation is modelled on the <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials Grant</a> flow in the OAuth 2 spec.</p>
 
 <p>This flow is useful in the following cases:</p>
@@ -658,6 +657,7 @@ As you'll first get API access in our staging environment, this documentation us
 <li>Machine-to-machine calls without the intervention of a user</li>
 <li>Non-user-centric API calls</li>
 </ul>
+
 <h3 id='step-1-get-client-access-token'>Step 1: Get client access token</h3><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/oauth/client_tokens <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --data <span class="s1">'
@@ -754,12 +754,15 @@ As you'll first get API access in our staging environment, this documentation us
 Instead of passing the client_id and client_secret values as query parameters in the post body, you may also pass them as a base64 URL encoded string in the Authorization header. To do this, base64 encode the url encoded client_id and client_secret together, with a colon separating them: aBase64EncodeFunction(clientidvalue:clientsecret). In this case the client_id and client_secret are not required as body parameters.
 </aside>
 <h3 id='step-2-use-the-client-access-token'>Step 2: Use the client access token</h3>
+
 <p>Your application is now authorised to make calls to the Rundl API, to access protected resources on behalf of your application itself, by passing the access token in the Authorization header.</p>
 
 <p><code>Authorization: OAuth &lt;base64 encoded client access token&gt;</code></p>
 
 <p>The available REST API resources are documented in this API reference. We also plan to document a number of walkthroughs that explain how to peform common tasks using the API.</p>
+
 <h2 id='user-authentication-flow-with-oauth'>User authentication flow with OAuth</h2>
+
 <p>A client application can get permission from a user to access protected resources on their behalf. The applications passes control to Rundl, we let the user log in to their chosen account, and pass back control to your application together with an assertion token. The token is linked to the user and your client id and can be exchanged for a user access token.</p>
 
 <p>This is a standard flow in many web applications. By delegating authentication to Rundl your application doesn&#39;t have to handle usernames and passwords.</p>
@@ -774,7 +777,9 @@ Instead of passing the client_id and client_secret values as query parameters in
 </ul>
 
 <p>Every time your application makes an API call it will be issued on behalf of the user. If the user doesn&#39;t have permissions to access the requested resource the call will be blocked.</p>
+
 <h3 id='step-1-redirect-users-to-the-rundl-authorisation-page'>Step 1: Redirect users to the Rundl authorisation page</h3>
+
 <p>Send your users to the Rundl authorisation page. </p>
 
 <p><code>https://stage-go.rundl.com/oauth/authorize</code></p>
@@ -814,7 +819,9 @@ Instead of passing the client_id and client_secret values as query parameters in
 <aside class="notice">
 Currently Rundl's OAuth implementation supports a user implicitly granting your application access to the protected resources on their behalf, via the act of logging in. In future Rundl will support explicit re-delegation of access rights to a protected resource. The user will explicitly grant access to the requested types of protected resources (scopes).
 </aside>
+
 <h3 id='step-2-handle-authorisation-response'>Step 2: Handle authorisation response</h3>
+
 <p>Rundl will return the user to your specified <code>redirect_uri</code> with the authorisation code as a parameter.</p>
 
 <p><code>https://example.com/your_redirect_uri?code=&lt;Auth-Code&gt;</code></p>
@@ -844,6 +851,7 @@ Currently Rundl's OAuth implementation supports a user implicitly granting your 
 <td>Optional parameter passing through the intent of the user for the session length. Support for this will be dropped once refresh token support is added. Your app will be able to implement its own session length strategy.</td>
 </tr>
 </tbody></table>
+
 <h3 id='step-3-get-user-access-token-from-rundl'>Step 3: Get user access token from Rundl</h3><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
@@ -957,238 +965,12 @@ Currently Rundl's OAuth implementation supports a user implicitly granting your 
 Instead of passing the client_id and client_secret values as query parameters in the post body, you may also pass them as a base64 URL encoded string in the Authorization header. To do this, base64 encode the url encoded client_id and client_secret together, with a colon separating them: aBase64EncodeFunction(clientidvalue:clientsecret). In this case the client_id and client_secret are not required as body parameters.
 </aside>
 <h3 id='step-4-use-the-access-token'>Step 4: Use the access token</h3>
+
 <p>Your application is now authorised to make calls to the Rundl API, to access protected resources on behalf of the authenticated user, by passing the access token in the Authorization header.</p>
 
 <p><code>Authorization: OAuth &lt;User-Access-Token&gt;</code></p>
 
 <p>See REST API method reference for information about the the available resources.</p>
-<h2 id='user-authentication-flow-with-jwt'>User authentication flow with JWT</h2>
-<p>Rundl allows third party applications to authenticate users directly with Rundl using a JSON Web Token (JWT) signed with an RSA key. This authentication method is intended for server-to-server applications.</p>
-
-<p>Using the JWT flow has a number of benefits:</p>
-
-<ul>
-<li>Removes the friction of your application&#39;s users logging in to Rundl in addition to your application.</li>
-<li>Reduces the number of steps in the authentication flow. Users are not directed to Rundl to authorise your application to access their data on Rundl</li>
-</ul>
-
-<p>Use the JWT flow in the following cases:</p>
-
-<ul>
-<li>Automatically onboard your application&#39;s users as managed Rundl user accounts.</li>
-<li>Single Sign On (SSO) your application&#39;s users to a Rundl shared web page.</li>
-</ul>
-<h3 id='about-sso'>About SSO</h3>
-<p>When you attempt to authenticate your application&#39;s user for the first time:</p>
-
-<ol>
-<li>A new Rundl user will be created based on the information included in the JWT assertion.</li>
-<li>A user access token is returned.</li>
-</ol>
-
-<p>After the first successful authentication, in subsequent attempts you will simply be returned a user access token.</p>
-
-<p>There are important conceptual differences with the Rundl user created via this flow:</p>
-
-<ul>
-<li>This flow essentially drops the first leg of the standard OAuth authorisation flow: the user isn&#39;t asked to authorize your application to access Rundl on their behalf.</li>
-<li>Your application is the designated identity provider for the an identity associated with the Rundl user.</li>
-<li>Due to the network and parallel process aspect to Rundl, if your application&#39;s user participates in rundls delivered by other service providers, they will get an additional identity from Rundl (or another approved identity provider) to access Rundl. Rundl will facilitate the creation of this separate identity associated with the user.</li>
-<li>The user access token returned is limited in scope to access host data (i.e. rundls) owned by the Rundl account associated with the registered identity provider. It can&#39;t be used to access data owned by other hosts. In future we envisage an approval mechanism to extend trust to other hosts. <em>NOTE: The access token may still be used to access network data not owned by hosts.</em></li>
-</ul>
-<h3 id='step-1-register-your-application-as-an-identity-provider'>Step 1: Register your application as an identity provider</h3>
-<p>In addition to the standard requirements for registering your application, you will need to register to become an identity provider. Contact <a href="mailto:support@rundl.com">support@rundl.com</a>.</p>
-<h3 id='step-2-generate-an-rsa-keypair'>Step 2: Generate an RSA Keypair</h3>
-<blockquote>
-<p>Run the following commands (for example using Cygwin on Windows).</p>
-
-<p>Generate private key:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>openssl genrsa -out private_key.pem 2048
-</code></pre>
-<blockquote>
-<p>Generate public key:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>openssl rsa -pubout -in private_key.pem -out public_key.pem
-</code></pre>
-<blockquote>
-<p>If generated properly, the RSA public key should look like this:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>-----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0
-FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
-3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQAB
------END PUBLIC KEY-----
-</code></pre>
-<p>To sign and authenticate a JWT assertion you need to generate a RSA private-public keypair. You will sign your requests with the private key, which is verified by the public key  you provide to Rundl. Be sure to protect your private key.</p>
-
-<p>We suggest generating the keypair using the <a href="https://www.openssl.org/">OpenSSL</a> tool.</p>
-
-<p>If using other tools, note the following settings:</p>
-
-<table><thead>
-<tr>
-<th>Setting</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Key length</td>
-<td>2048</td>
-</tr>
-<tr>
-<td>Algorithm</td>
-<td>RS512</td>
-</tr>
-<tr>
-<td>Public key</td>
-<td>Export asn.1 format</td>
-</tr>
-</tbody></table>
-<h3 id='step-3-submit-the-public-key'>Step 3: Submit the Public Key</h3>
-<p>The public key is not a secret so can be emailed or posted to a rundl. This key is required to be verifiably under the control of the party identified as the issuer of the JWT.</p>
-<h3 id='step-4-construct-the-jwt-assertion'>Step 4: Construct the JWT assertion</h3>
-<p>The following table lists libraries that have been used to successfully generate a valid JWT:</p>
-
-<table><thead>
-<tr>
-<th>Language</th>
-<th>Link</th>
-<th>Settings</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Java</td>
-<td>https://github.com/auth0/java-jwt<br/>Relevant sample code:<br/>com.auth0.jwt.JWTRoundTripRsa256Test</td>
-<td><strong>Key length:</strong> 2048 (default)<br/><strong>Algorithm:</strong> options.setAlgorithm(Algorithm.RS512)<br/><strong>Public key:</strong> asn.1 format export.</td>
-</tr>
-<tr>
-<td>C#</td>
-<td>https://www.nuget.org/packages/System.IdentityModel.Tokens.Jwt/</td>
-<td></td>
-</tr>
-<tr>
-<td>PHP</td>
-<td>https://github.com/emarref/jwt</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<p>It is likely that other libraries from https://jwt.io/ are also compatible.</p>
-
-<p><strong>Header attributes</strong></p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>alg</code></td>
-<td>String</td>
-<td><strong>Required.</strong> The algorithm used to verify the signature. &quot;RS512&quot;. 512 represents the SHA-2 hashing algorithm that is used by the digital signature.</td>
-</tr>
-<tr>
-<td><code>typ</code></td>
-<td>String</td>
-<td><strong>Required.</strong> Type of token. Default is “JWT” to specify a JSON Web Token (JWT).</td>
-</tr>
-</tbody></table>
-
-<p><strong>Payload claims</strong></p>
-
-<table><thead>
-<tr>
-<th>Claim</th>
-<th>Type</th>
-<th>Description</th>
-<th>Sample</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><code>given_name</code></td>
-<td>String</td>
-<td><strong>Required.</strong> The user&#39;s first name.</td>
-<td>&quot;given_name&quot;: &quot;Jerry&quot;</td>
-</tr>
-<tr>
-<td><code>family_name</code></td>
-<td>String</td>
-<td>The user&#39;s surname.</td>
-<td>&quot;family_name&quot;: &quot;Seldon&quot;</td>
-</tr>
-<tr>
-<td><code>mobilephone</code></td>
-<td>String</td>
-<td>The user&#39;s mobile phone number.</td>
-<td>&quot;mobilephone&quot;: &quot;+61477289117&quot;</td>
-</tr>
-<tr>
-<td><code>email</code></td>
-<td>String</td>
-<td><strong>Required.</strong> Email address. Required for notifications.</td>
-<td>&quot;email&quot;: &quot;jseldon@gmail.com&quot;</td>
-</tr>
-<tr>
-<td><code>exp</code></td>
-<td>Number</td>
-<td><strong>Required.</strong>     JWT Expiration Time. UTC timestamp - seconds since UnixEpoch (UTC 1970-01-01T0:0:0Z) - after which the JWT cannot be accepted.</td>
-<td>&quot;exp&quot;: 1475552704</td>
-</tr>
-<tr>
-<td><code>sub</code></td>
-<td>String</td>
-<td><strong>Required.</strong> Subject of the JWT. Locally unique id of the app user in the context of the issuer.</td>
-<td>&quot;sub&quot;: &quot;1234567890&quot;</td>
-</tr>
-<tr>
-<td><code>iss</code></td>
-<td>String</td>
-<td><strong>Required.</strong> The id for the Rundl identity provider registered in step 1. Identifies the principal that issued the JWT.</td>
-<td>&quot;iss&quot;: &quot;1234567890&quot;</td>
-</tr>
-<tr>
-<td><code>iat</code></td>
-<td>Number</td>
-<td><strong>Required.</strong> UTC timestamp - seconds since UnixEpoch (UTC 1970-01-01T0:0:0Z) - when JWT issued. This can determine the age of the JWT.</td>
-<td>&quot;iat&quot;: 1475549104</td>
-</tr>
-<tr>
-<td><code>aud</code></td>
-<td>String</td>
-<td><strong>Required.</strong> Audience (JWT target). Identifies the intended recipients of the JWT.  Always &quot;https://go.rundl.com/api/oauth/access_tokens&quot; for getting OAuth access tokens.</td>
-<td>&quot;aud&quot;: &quot;https://go.rundl.com/api/oauth/access_tokens&quot;</td>
-</tr>
-</tbody></table>
-<h3 id='step-5-get-access-token-from-rundl'>Step 5: Get access token from Rundl</h3>
-<blockquote>
-<p>To get a user access token, passing the JWT in the header:</p>
-</blockquote>
-<pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/oauth/access_tokens <span class="se">\</span>
-  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: JWT &lt;jwt&gt; \
-  --data '</span>
-    <span class="o">{</span>
-      <span class="s2">"grant_type"</span>:<span class="s2">"jwt_bearer"</span>,
-      <span class="s2">"client_id"</span>:<span class="s2">"1234"</span>,
-      <span class="s2">"scope"</span>:<span class="s2">"private"</span>,
-      <span class="s2">"stay_signed_in"</span>:<span class="s2">"true"</span>
-    <span class="o">}</span>
-  <span class="s1">'
-</span></code></pre>
-<p>Your service will authenticate to Rundl by requesting a user access token, passing the JWT in the Authorization header.</p>
-<h3 id='step-6-use-the-access-token'>Step 6: Use the access token</h3>
-<p>Your application is now authorised to make calls to the Rundl API, to access protected resources on behalf of the authenticated user, by passing the access token in the Authorization header.</p>
-
-<p><code>Authorization: OAuth &lt;base64 encoded user access token&gt;</code></p>
-
-<p>See REST API method reference for information about the the available resources.</p>
-
-<p>You can also pass the access token as a URL parameter to one of our responsive shared pages.</p>
-
-<p><code>https://go.rundl.com/auth/session?access_token={&lt;User-Access-Token&gt;}&amp;redirect_url={redirect_url}</code></p>
 <h1 id='core-resources'>Core resources</h1><h2 id='the-gid-object'>The gid object</h2>
 <p>Generic object representing any resource on Rundl</p>
 
@@ -1334,7 +1116,7 @@ FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
           {
             "name":"add",
             "id":123456,
-            "data":"{\"id\":123456,\"version\":1}",
+            "version":1,
             "object":"realproperty"
           }
         ]
