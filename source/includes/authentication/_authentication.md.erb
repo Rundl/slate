@@ -1,0 +1,12 @@
+# Authentication
+
+Each request to the Rundl API must be authenticated. Rundl uses OAuth to provide authorised access to resources via its API. OAuth has a number of benefits:
+
+- Users are not required to share their passwords with third party applications.
+- Standard libraries available in most application frameworks.
+
+When you register your application we assign it OAuth credentials and send them to you. Contact [support@rundl.com](mailto:support@rundl.com?subject=Register API client) to register for API access. Registration is currently a manual process.
+
+<%= partial "includes/authentication/app-auth" %>
+<%= partial "includes/authentication/user-auth-oauth" %>
+<%-# partial "includes/authentication/user-auth-jwt" -%>

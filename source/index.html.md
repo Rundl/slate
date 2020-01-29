@@ -10,7 +10,7 @@ toc_footers:
 includes:
   - welcome
   - basics
-  - authentication
+  - authentication/authentication
   - core-resources
   - orders
   - files

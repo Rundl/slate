@@ -64,7 +64,7 @@ curl -X POST https://stage-go.rundl.com/api/orders?account=123456 \
           {
             "name":"add",
             "id":123456,
-            "data":"{\"id\":123456,\"version\":1}",
+            "version":1,
             "object":"realproperty"
           }
         ]
