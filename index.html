@@ -312,6 +312,9 @@
                     <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
                   </li>
                   <li>
+                    <a href="#file-categories" class="toc-h2 toc-link" data-title="File categories">File categories</a>
+                  </li>
+                  <li>
                     <a href="#the-upload_session-object" class="toc-h2 toc-link" data-title="The upload_session object">The upload_session object</a>
                   </li>
                   <li>
@@ -355,6 +358,9 @@
                     <a href="#the-rundl-object" class="toc-h2 toc-link" data-title="The rundl object">The rundl object</a>
                   </li>
                   <li>
+                    <a href="#variant-rundl-object-to-support-start-rundl-only" class="toc-h2 toc-link" data-title="Variant rundl object to support start rundl only">Variant rundl object to support start rundl only</a>
+                  </li>
+                  <li>
                     <a href="#start-a-rundl" class="toc-h2 toc-link" data-title="Start a rundl">Start a rundl</a>
                   </li>
               </ul>
@@ -373,6 +379,20 @@
                   </li>
                   <li>
                     <a href="#update-a-rundl-participant" class="toc-h2 toc-link" data-title="Update a rundl participant">Update a rundl participant</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#rundl-messages" class="toc-h1 toc-link" data-title="Rundl messages">Rundl messages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
+                  </li>
+                  <li>
+                    <a href="#the-message-object" class="toc-h2 toc-link" data-title="The message object">The message object</a>
+                  </li>
+                  <li>
+                    <a href="#post-a-message" class="toc-h2 toc-link" data-title="Post a message">Post a message</a>
                   </li>
               </ul>
           </li>
@@ -1167,7 +1187,7 @@ Example shows optional actions to attach additional resources such as files or a
 <h3 id='request-body'>Request body</h3>
 <p>See example request.</p>
 <h1 id='files'>Files</h1><h2 id='overview'>Overview</h2>
-<p>Upload files to Rundl before attaching to other entities within the Rundl API. Rundl uses AWS S3 as its file storage backend. </p>
+<p>Upload files to Rundl before attaching to other entities within the Rundl API. Rundl uses <a href="https://docs.aws.amazon.com/s3">AWS S3</a> as its file storage backend. </p>
 
 <p>Uploading files is a three-step process:</p>
 
@@ -1176,6 +1196,45 @@ Example shows optional actions to attach additional resources such as files or a
 <li>Upload the file to AWS S3. Uploading is best done using one of the many AWS SDKs.</li>
 <li>Update the upload_session to complete the upload.</li>
 </ol>
+<h2 id='file-categories'>File categories</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>unknown</code></td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logo</code></td>
+<td>1</td>
+<td>eg group logo</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>2</td>
+<td>data file (eg rundl file, wall file, service resource)</td>
+</tr>
+<tr>
+<td><code>avatar</code></td>
+<td>3</td>
+<td>user avatar</td>
+</tr>
+<tr>
+<td><code>design_header</code></td>
+<td>4</td>
+<td>branding / design header image</td>
+</tr>
+<tr>
+<td><code>design_content</code></td>
+<td>5</td>
+<td>eg Step content image</td>
+</tr>
+</tbody></table>
 <h2 id='the-upload_session-object'>The upload_session object</h2>
 <table><thead>
 <tr>
@@ -1255,15 +1314,14 @@ Example shows optional actions to attach additional resources such as files or a
 <td>Server allocated token identifying the upload session.</td>
 </tr>
 </tbody></table>
-<h2 id='create-an-upload_session'>Create an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/files/uploadsession?account<span class="o">=</span>123456 <span class="se">\</span>
+<h2 id='create-an-upload_session'>Create an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/files/uploadsession?account<span class="o">=</span>123456&amp;target<span class="o">=</span>42980836&amp;category<span class="o">=</span>2 <span class="se">\ </span> 
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
     {
       "upload_session": {
         "filename": logo.png,
-        "size": 15992,
-        "publish": false
+        "size": 15992
       }
     }
   '</span>
@@ -1302,31 +1360,39 @@ Example shows optional actions to attach additional resources such as files or a
 <td>account_id</td>
 <td>The id of the selected account when uploading the file</td>
 </tr>
+<tr>
+<td>target</td>
+<td>The id of the entity the file will be associated with e.g. a rundl id.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>The category of file in Rundl.</td>
+</tr>
 </tbody></table>
 <h2 id='update-an-upload_session'>Update an upload_session</h2><pre class="highlight shell tab-shell"><code>curl -X PATCH https://stage-go.rundl.com/api/files/uploadsession/d419b96c-b320-4088-b66a-7b7706cfdc57?account<span class="o">=</span>123456 <span class="se">\</span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
     {
-      "upload_session": {
+      "upload_session":{
         "aws_access_key":"ASIAJAY...WXXTCA",
-        "aws_bucket":"uploadsdevrundlco",
+        "aws_bucket":"uploads.stage.rundl.co",
         "aws_region":"ap-southeast-2",
         "aws_resource_key":"d419b96c-x111-1111-x11y-7b7706cfdc57",
         "aws_secret_key":"584veUApzU...a57z0AFHp",
         "aws_session_token":"FQoDYXdzEOj//////////wEaDDp8CIKb1dxGiL2hNyK...rNyAw+vZGSPQbCCyoEHStewo177t0QU=",
-        "content_type":"image/png",
+        "content_type":"image/jpeg",
         "file":null,
-        "filename":"logo.png",
-        "publish":false,
-        "size":15992,
-        "status": "uploaded",
-        "upload_token":"d419b96c-x111-1111-x11y-7b7706cfdc57",
+        "filename":"handshake.jpg",
+        "publish":null,
+        "size":233106,
+        "status":"uploaded",
+        "upload_token":"d419b96c-x111-1111-x11y-7b7706cfdc57"
       }
     }
   '</span>
 </code></pre><h3 id='http-request-2'>HTTP Request</h3>
-<p><code>PUT    /files/upload_sessions/{upload_token}?account={account_id}</code></p>
+<p><code>PATCH  /files/upload_sessions/{upload_token}?account={account_id}</code></p>
 <h3 id='query-parameters-2'>Query parameters</h3>
 <table><thead>
 <tr>
@@ -1352,7 +1418,7 @@ Example shows optional actions to attach additional resources such as files or a
 </tr>
 </tbody></table>
 <h1 id='checkouts'>Checkouts</h1><h2 id='overview'>Overview</h2>
-<p>A checkout represents the attributes of in-app purchase to be made on Rundl. Creating a checkout is required before making a purchase, such as when starting a rundl or consuming an add-on. The checkout id is passed as a URL parameter to APIs related to purchase flows.</p>
+<p>A checkout represents the attributes of in-app purchase to be made on Rundl. Creating a checkout maybe required before making some in-app purchases. The checkout id is passed as a URL parameter to APIs related to purchase flows.</p>
 <h2 id='the-checkout-object'>The checkout object</h2>
 <table><thead>
 <tr>
@@ -1674,29 +1740,9 @@ Example shows optional actions to attach additional resources such as files or a
 <td>The description of the rundl.</td>
 </tr>
 <tr>
-<td><code>host</code></td>
+<td><code>video</code></td>
 <td>string</td>
-<td>The host of the rundl. Gid if start, or entity when get.</td>
-</tr>
-<tr>
-<td><code>files</code></td>
-<td>list</td>
-<td>List of Rundl file identifiers. Stage files on auth user&#39;s account via the files API prior to sending the order.</td>
-</tr>
-<tr>
-<td><code>participant_leads</code></td>
-<td>list</td>
-<td>List of participant_lead objects</td>
-</tr>
-<tr>
-<td><code>related_rundls</code></td>
-<td>list</td>
-<td>List of related rundls</td>
-</tr>
-<tr>
-<td><code>fields</code></td>
-<td>list</td>
-<td>List of fields</td>
+<td>Ignore. Shouldn&#39;t be here.</td>
 </tr>
 <tr>
 <td><code>service</code></td>
@@ -1709,354 +1755,201 @@ Example shows optional actions to attach additional resources such as files or a
 <td>The name of the service</td>
 </tr>
 <tr>
+<td><code>service_profile_banners</code></td>
+<td>list</td>
+<td>Object containing sized image urls.</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>integer</td>
+<td>Unique identifier for an order, where the rundl was initiated from order flow.</td>
+</tr>
+<tr>
+<td><code>model_id</code></td>
+<td>integer</td>
+<td>Unique identifier for service model.</td>
+</tr>
+<tr>
 <td><code>brand_color</code></td>
 <td>string</td>
 <td>Hexadecimal colour value. If not set on the rundl, inherits from the service.</td>
 </tr>
 <tr>
-<td><code>header_image_url</code></td>
-<td>string</td>
-<td>Url for header image. If not set on the rundl, inherits from the service.</td>
+<td><code>profile_banners</code></td>
+<td>list</td>
+<td>List of sized image urls.</td>
 </tr>
 <tr>
 <td><code>metadata</code></td>
 <td>object</td>
-<td>Context information related to the order</td>
+<td>Context information related to the rundl</td>
 </tr>
 <tr>
 <td><code>state</code></td>
-<td>integer</td>
-<td>Status of the order. See states reference.</td>
-</tr>
-<tr>
-<td><code>state_metadata</code></td>
 <td>object</td>
 <td>Status of the order. See approval states reference.</td>
 </tr>
 <tr>
 <td><code>last_actioned_step</code></td>
 <td>object</td>
-<td></td>
+<td>Object representing the step that was last updated.</td>
 </tr>
 <tr>
 <td><code>last_actioned_step_state</code></td>
 <td>object</td>
-<td></td>
+<td>Object representing the status of the step that was last updated.</td>
 </tr>
 <tr>
 <td><code>last_actioned_step_state_metadata</code></td>
 <td>object</td>
-<td></td>
+<td>Object with standard metadata relating to the last status update.</td>
 </tr>
 <tr>
 <td><code>percentage_complete</code></td>
 <td>integer</td>
 <td></td>
 </tr>
+<tr>
+<td><code>reference</code></td>
+<td>string</td>
+<td>Host&#39;s own reference for this rundl. Optionally overridden by each participant.</td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>string</td>
+<td>The host of the rundl. Gid if start, or entity when get.</td>
+</tr>
+<tr>
+<td><code>related_rundls</code></td>
+<td>list</td>
+<td>List of related rundls</td>
+</tr>
+<tr>
+<td><code>add_ons</code></td>
+<td>list</td>
+<td>Expandable. List of add-ons enabled for this rundl.</td>
+</tr>
 </tbody></table>
-<h2 id='start-a-rundl'>Start a rundl</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/services/24415244/rundls?account<span class="o">=</span>123456&amp;checkout<span class="o">=</span>30798521&amp;payment_account<span class="o">=</span>30736909 <span class="se">\ </span>
+<h2 id='variant-rundl-object-to-support-start-rundl-only'>Variant rundl object to support start rundl only</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>name</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>fields</code></td>
+<td>list</td>
+<td>List of fields</td>
+</tr>
+<tr>
+<td><code>subscriptions</code></td>
+<td>list</td>
+<td>List of event subscriptions</td>
+</tr>
+<tr>
+<td><code>related_rundls</code></td>
+<td>list</td>
+<td>List of related rundl identifiers</td>
+</tr>
+<tr>
+<td><code>files</code></td>
+<td>list</td>
+<td>List of Rundl file identifiers. Stage files on auth user&#39;s account via the files API prior to sending the order.</td>
+</tr>
+<tr>
+<td><code>participants</code></td>
+<td>list</td>
+<td>List of participant objects</td>
+</tr>
+</tbody></table>
+<h2 id='start-a-rundl'>Start a rundl</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/services/24415244/rundls?account<span class="o">=</span>123456 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
       {
-      "rundl":{
-        "name":"Sale of property at 123 Baker St Caulfield Vic 3126",
-        "description":"Sale of property at 123 Baker St Caulfield Vic 3126",
-        "host":{
-          "id":2237816
-        },
-        "participant_leads":[
-          {
-            "context":1688402,
-            "roles":[
-              "Real Estate Agent"
-            ]
-          }
-        ],
-        "files":[
-          24415295
-        ]
+        "rundl":{
+          "name":"Sale of property at 123 Baker St Caulfield Vic 3126",
+          "description":"Sale of property at 123 Baker St Caulfield Vic 3126",
+          "host":{
+            "id":2237816
+          },
+          "participants":[
+            {
+              "contact":{
+                "first_name":"Demo",
+                "surname":"User",
+                "email":"demo_user@gmail.com",
+                "mobile":"+61411111111"
+              },
+              "roles":[
+                "Seller"
+              ]
+            }
+          ],
+          "files":[
+            42980832
+          ]
+        }
       }
-    }
   '</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"actions"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415298</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42980836</span><span class="p">,</span><span class="w">
   </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"rundl"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"add_ons"</span><span class="p">:[</span><span class="w">
-
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"brand_color"</span><span class="p">:</span><span class="s2">"#53c876"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"add_ons"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"brand_color"</span><span class="p">:</span><span class="s2">"#53C876"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Sale of property at 123 Baker St Caulfield Vic 3126"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"header_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"host"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1687398</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1687398</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+    </span><span class="err">...</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"last_actioned_step"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Thank you for appointing us to be your selling agents.</span><span class="se">\u</span><span class="s2">000a</span><span class="se">\u</span><span class="s2">000aWe look forward to achieving a great sale result for you!</span><span class="se">\u</span><span class="s2">000aIf you haven't already signed the agreements please download and sign them then upload them using the blue pencil below right."</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">39</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415316</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Agency and marketing agreement"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"last_actioned_step_state"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"EffectiveDate"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197881+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Id"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"PreviousState"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"State"</span><span class="p">:</span><span class="mi">1</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"last_actioned_step_state_metadata"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"created_context"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197736+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_user"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415317</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updated_context"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"updated_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004198072+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updated_user"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"last_actioned_step"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_actioned_step_state"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_actioned_step_state_metadata"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"metadata"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"created_context"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197000+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_user"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415298</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updated_context"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"updated_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197000+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updated_user"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="err">...</span><span class="w">
   </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"model_id"</span><span class="p">:</span><span class="mi">42979888</span><span class="p">,</span><span class="w">
   </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Sale of property at 123 Baker St Caulfield Vic 3126"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"order"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"percentage_complete"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"related_rundls"</span><span class="p">:[</span><span class="w">
-
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"service"</span><span class="p">:</span><span class="mi">24415244</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"service_name"</span><span class="p">:</span><span class="s2">"Real estate sale journey (Demo)"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"profile_banners"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reference"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"related_rundls"</span><span class="p">:[],</span><span class="w">
+  </span><span class="s2">"service"</span><span class="p">:</span><span class="mi">42979887</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"service_name"</span><span class="p">:</span><span class="s2">"Selling your home with Property Agents"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"service_profile_banners"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"state"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"EffectiveDate"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197881+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Id"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"PreviousState"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"State"</span><span class="p">:</span><span class="mi">2</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"state_metadata"</span><span class="p">:{</span><span class="w">
-    </span><span class="s2">"created_context"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004197350+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"created_user"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">24415299</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updated_context"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">2237816</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Sales"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
-        </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">36</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1687390</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Property Agents (Demo)"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">dev-media.rundl.co</span><span class="se">\/</span><span class="s2">1687390</span><span class="se">\/</span><span class="s2">24415219.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"updated_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1518004198159+1100)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"updated_user"</span><span class="p">:{</span><span class="w">
-      </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">1688398</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Tyson Trennery"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"profile_icon_url"</span><span class="p">:</span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">secure.gravatar.com</span><span class="se">\/</span><span class="s2">avatar</span><span class="se">\/</span><span class="s2">1199a56934177446b51650a29a24dd3a"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="err">...</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"video"</span><span class="p">:</span><span class="kc">null</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Start a rundl based on a service. The user context starting the rundl must have permission to start rundls for the service. The chosen host must have permission to host rundls for the service.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>POST   /services/{service_id}/rundls?account={account_id}&amp;checkout={checkout}&amp;payment_account={payment_account}</code></p>
+<p><code>POST   /services/{service_id}/rundls?account={account_id}</code></p>
 <h3 id='query-parameters'>Query parameters</h3>
 <table><thead>
 <tr>
@@ -2067,14 +1960,6 @@ Example shows optional actions to attach additional resources such as files or a
 <tr>
 <td>account_id</td>
 <td>The id of the selected account when starting the rundl</td>
-</tr>
-<tr>
-<td>checkout</td>
-<td>The id of a checkout resource created for the purpose of the start rundl request</td>
-</tr>
-<tr>
-<td>payment_account</td>
-<td>The id of the payment account for the rundl host. The host will be charged the relevant host fee.</td>
 </tr>
 </tbody></table>
 <h3 id='path-parameters'>Path parameters</h3>
@@ -2092,13 +1977,17 @@ Example shows optional actions to attach additional resources such as files or a
 <h3 id='request-body'>Request body</h3>
 <p>See example request.</p>
 <h1 id='rundl-participants'>Rundl participants</h1><h2 id='overview'>Overview</h2>
-<p>Participants are the stakeholders in the business transaction that&#39;s getting delivered as a rundl. People, groups, or members and teams within groups, can participate in rundls.</p>
+<p>Participants are the stakeholders in the business transaction that&#39;s getting delivered as a rundl. </p>
 
-<p>The rundl participants API supports adding existing contexts or inviting new users as participants in a rundl. </p>
+<p>Contexts (people, groups, or members and teams within groups) can participate in rundls. The rundl participants API supports adding existing contexts or inviting new users as participants in a rundl. </p>
 
-<p>For existing contexts, clients can implement the search API to find existing users/groups. For groups, clients can optionally query the Contexts API to find available contexts for that group. Note: Upon adding an existing context, a context&#39;s settings determines if a full participant is added, or if a pending participant is added and a request is created for their approval. Where a request is created, the participant transitions from pending to full after accepting the request.</p>
+<p>For existing contexts, clients can implement the search API to find existing users/groups. For groups, clients can optionally query the Contexts API to find available contexts for that group. </p>
+
+<p>Note: Upon adding an existing context, a context&#39;s settings determines if a full participant is added, or if a pending participant is added and a request is created for their approval. Where a request is created, the participant transitions from pending to full after accepting the request.</p>
 
 <p>For new users, add participants by supplying person details including their email address. A pending user and participant is added and an invitation to join Rundl is sent to the address. Upon accepting the invitation (email receiver clicks link in email and signs up) the pending user and participant transitions to a full. </p>
+
+<p>Virtual participants include a contact instead of a context and are not invited to participate. Virtual participants remain passive until they are &#39;upgraded&#39; later to participate.</p>
 
 <aside class="warning">When attempting to add a new user, if the supplied email is already a verified email for an existing user, the existing user is simply added/invited. Other person details will be ignored.</aside>
 <h2 id='the-participant-object'>The participant object</h2>
@@ -2113,16 +2002,28 @@ Example shows optional actions to attach additional resources such as files or a
 <td>The id of the participant.</td>
 </tr>
 <tr>
+<td><code>categories</code></td>
+<td>List of strings to represent participant category.</td>
+</tr>
+<tr>
 <td><code>rundl</code></td>
 <td>The id of the rundl the participant is added to.</td>
 </tr>
 <tr>
 <td><code>context</code></td>
-<td>The id of the existing context being added as a participant. <br/><code>Expandable</code></td>
+<td>The context that is participating. <br/><code>Expandable</code></td>
+</tr>
+<tr>
+<td><code>contact</code></td>
+<td>The contact associated with the participant. <br/><code>Expandable</code></td>
 </tr>
 <tr>
 <td><code>status</code></td>
 <td>Status of the participant.</td>
+</tr>
+<tr>
+<td><code>created_date</code></td>
+<td>The date the participant was added.</td>
 </tr>
 <tr>
 <td><code>roles</code></td>
@@ -2137,29 +2038,34 @@ Example shows optional actions to attach additional resources such as files or a
 <td>Flag for making participant an observer.</td>
 </tr>
 <tr>
-<td><code>created_date</code></td>
-<td>The date the participant was added.</td>
-</tr>
-<tr>
-<td><code>person</code></td>
-<td>An object with <code>first_name</code>, <code>last_name</code>, <code>mobile</code>, and <code>email</code> details for a new user to add as a participant.</td>
-</tr>
-<tr>
 <td><code>message</code></td>
 <td>Message included in invitation email when adding a participant.</td>
 </tr>
+<tr>
+<td><code>reference</code></td>
+<td>The participant&#39;s own reference for the rundl they&#39;re participating in.</td>
+</tr>
 </tbody></table>
-<h2 id='add-a-rundl-participant'>Add a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://stage-go.rundl.com/api/rundls/123456/participants?account<span class="o">=</span>123456 <span class="se">\ </span>
+<h2 id='add-a-rundl-participant'>Add a rundl participant</h2>
+<p>Not the lack of category. No category implies a virtual participant.</p>
+<pre class="highlight shell tab-shell"><code>curl -X PUT https://stage-go.rundl.com/api/rundls/123456/participants?account<span class="o">=</span>123456 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
       {
         "participant":{
-          "rundl":123456,
-          "message":"I would like to add you as a participant in this rundl.",
+          "rundl":42980836,
+          "message":"I would like to add you as a participant in \"Sale of property at 123 Baker St Caulfield Vic 3126\".",
           "observer":false,
-          "context":1688908,
-          "person":{}
+          "contact":{
+            "first_name":"Demo",
+            "surname":"User",
+            "mobile":"+61411111111",
+            "email":"demo_user@rundl.com"
+          },
+          "roles":[
+            "Default"
+          ]
         }
       }
   '</span>
@@ -2168,16 +2074,42 @@ Example shows optional actions to attach additional resources such as files or a
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"context"</span><span class="p">:</span><span class="mi">1688908</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1520237422810+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">25577359</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42980998</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"participant"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">
+    </span><span class="s2">"virtual"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"contact"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42980996</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"contact"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1687398</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="s2">"Demo User"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"demo_user@rundl.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Demo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metadata"</span><span class="p">:{</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"mobile"</span><span class="p">:</span><span class="s2">"+61 411 111 111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"referrer_codes"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"User"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"context"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1581998394354+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_host"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"observer"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"person"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="s2">"Default"</span><span class="p">],</span><span class="w">
-  </span><span class="s2">"rundl"</span><span class="p">:</span><span class="mi">123456</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="s2">"order"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reference"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="w">
+    </span><span class="s2">"Default"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"rundl"</span><span class="p">:</span><span class="mi">42980836</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='http-request'>HTTP Request</h3>
 <p><code>POST   /rundls/{rundl_id}/participants?account={account_id}</code></p>
@@ -2207,22 +2139,18 @@ Example shows optional actions to attach additional resources such as files or a
 </tbody></table>
 <h3 id='request-body'>Request body</h3>
 <p>See example request.</p>
-<h2 id='update-a-rundl-participant'>Update a rundl participant</h2><pre class="highlight shell tab-shell"><code>curl -X PUT https://stage-go.rundl.com/api/rundls/123456/participants/25577359?account<span class="o">=</span>123456 <span class="se">\ </span>
+<h2 id='update-a-rundl-participant'>Update a rundl participant</h2>
+<p>For example, upgrade a virtual participant to full participant.</p>
+<pre class="highlight shell tab-shell"><code>curl -X PATCH https://stage-go.rundl.com/api/rundls/123456/participants/25577359?account<span class="o">=</span>123456 <span class="se">\ </span>
   --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
   --data <span class="s1">'
       {
         "participant":{
-          "message":null,
-          "context":1688908,
-          "created_date":"/Date(1520237422810+0000)/",
-          "id":25577359,
-          "is_host":false,
-          "observer":false,
-          "person":null,
-          "roles":["Seller"],
-          "rundl":123456,
-          "status":2
+          "categories":[
+            "participant"
+          ],
+          "id":42980998
         }
       }
   '</span>
@@ -2231,21 +2159,64 @@ Example shows optional actions to attach additional resources such as files or a
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"context"</span><span class="p">:</span><span class="mi">1688908</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1520237422810+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">25577359</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42980998</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"participant"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"categories"</span><span class="p">:[</span><span class="w">
+    </span><span class="s2">"participant"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"contact"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42980996</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"contact"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="mi">1687398</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"display_name"</span><span class="p">:</span><span class="s2">"Demo User"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="s2">"demo_user@rundl.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"first_name"</span><span class="p">:</span><span class="s2">"Demo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"metadata"</span><span class="p">:{</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"mobile"</span><span class="p">:</span><span class="s2">"+61 411 111 111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"referrer_codes"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"surname"</span><span class="p">:</span><span class="s2">"User"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"context"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42981002</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"context"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">43</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Demo User"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile_image_urls"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_current"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"privacy"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"team_type"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"created_date"</span><span class="p">:</span><span class="s2">"</span><span class="se">\/</span><span class="s2">Date(1581998394354+0000)</span><span class="se">\/</span><span class="s2">"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"is_host"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="s2">"observer"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"person"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="s2">"Seller"</span><span class="p">],</span><span class="w">
-  </span><span class="s2">"rundl"</span><span class="p">:</span><span class="mi">123456</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"message"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="s2">"order"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reference"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"roles"</span><span class="p">:[</span><span class="w">
+    </span><span class="s2">"Default"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"rundl"</span><span class="p">:</span><span class="mi">42980836</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Updates the participant&#39;s roles or toggles being an observer.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>PUT    /rundls/{rundl_id}/participants/{participant_id}?account={account_id}</code></p>
+<p><code>PATCH  /rundls/{rundl_id}/participants/{participant_id}?account={account_id}</code></p>
 <h3 id='query-parameters-2'>Query parameters</h3>
 <table><thead>
 <tr>
@@ -2275,6 +2246,204 @@ Example shows optional actions to attach additional resources such as files or a
 </tr>
 </tbody></table>
 <h3 id='request-body-2'>Request body</h3>
+<p>See example request.</p>
+<h1 id='rundl-messages'>Rundl messages</h1><h2 id='overview'>Overview</h2>
+<p>A rundl message is a communication sent within a rundl to some or all participants. A message may have attached files and links. Permissions can be set to control who can see the message.</p>
+<h2 id='the-message-object'>The message object</h2>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Unique identifier for the rundl.</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>string</td>
+<td>The message content</td>
+</tr>
+<tr>
+<td><code>privacy</code></td>
+<td>integer</td>
+<td>Privacy category information.</td>
+</tr>
+<tr>
+<td><code>parent</code></td>
+<td>object</td>
+<td>Object representing the parent rundl entity related to the message.</td>
+</tr>
+<tr>
+<td><code>metadata</code></td>
+<td>object</td>
+<td>Context information related to the message</td>
+</tr>
+<tr>
+<td><code>pin</code></td>
+<td>object</td>
+<td>Information about the pinning of this message in the rundl.</td>
+</tr>
+<tr>
+<td><code>comments</code></td>
+<td>list</td>
+<td>Comments attached to the message.</td>
+</tr>
+<tr>
+<td><code>links</code></td>
+<td>list</td>
+<td>Links attached to the message.</td>
+</tr>
+<tr>
+<td><code>files</code></td>
+<td>list</td>
+<td>Files attached to the message.</td>
+</tr>
+<tr>
+<td><code>reminders</code></td>
+<td>list</td>
+<td>Reminders attached to the message.</td>
+</tr>
+</tbody></table>
+<h2 id='post-a-message'>Post a message</h2><pre class="highlight shell tab-shell"><code>curl -X POST https://stage-go.rundl.com/api/rundls/42980836/messages?account<span class="o">=</span>123456 <span class="se">\ </span>
+  --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: OAuth &lt;User-Access-Token&gt;'</span> <span class="se">\</span>
+  --data <span class="s1">'
+      {
+        "message":{
+          "text":"Message here",
+          "actions":[
+            {
+              "name":"add",
+              "id":42981063,
+              "object":"file"
+            }
+          ]
+        }
+      }
+  '</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42981072</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"message"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"comments"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:[],</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"next"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"previous"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"strategy"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"files"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42981063</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"file"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_type"</span><span class="p">:</span><span class="s2">"image</span><span class="se">\/</span><span class="s2">jpeg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"metadata"</span><span class="p">:{</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"handshake.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"privacy"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"published"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"related_entities"</span><span class="p">:[</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"size"</span><span class="p">:</span><span class="mi">233106</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumb_urls"</span><span class="p">:[</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"next"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"previous"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"strategy"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"links"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:[],</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"next"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"previous"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"strategy"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"parent"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">42980836</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"entity_identity"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version_latest"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content_image_url"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"Sale of property at 123 Baker St Caulfield Vic 3126"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"global_type"</span><span class="p">:</span><span class="mi">32</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Sale of property at 123 Baker St Caulfield Vic 3126"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"parent"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile_image_urls"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"video_id"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"pin"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"privacy"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reminders"</span><span class="p">:{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:[],</span><span class="w">
+    </span><span class="s2">"object"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"paging"</span><span class="p">:{</span><span class="w">
+      </span><span class="s2">"next"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"previous"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"strategy"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"text"</span><span class="p">:</span><span class="s2">"dsadsa"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Post a message to a rundl. The user context posting the message must have permission to collaborate on the rundl. .</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST   /rundls/{rundl_id}/messages?account={account_id}</code></p>
+<h3 id='query-parameters'>Query parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_id</td>
+<td>The id of the selected account when starting the rundl</td>
+</tr>
+</tbody></table>
+<h3 id='path-parameters'>Path parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>rundl_id</td>
+<td>The id of the rundl being posted to</td>
+</tr>
+</tbody></table>
+<h3 id='request-body'>Request body</h3>
 <p>See example request.</p>
 <h1 id='real-estate'>Real estate</h1><h2 id='overview'>Overview</h2>
 <p>APIs to support real estate transactions, in particular by supporting property data.</p>
