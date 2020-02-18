@@ -2,7 +2,7 @@
 
 ## Overview
 
-A checkout represents the attributes of in-app purchase to be made on Rundl. Creating a checkout is required before making a purchase, such as when starting a rundl or consuming an add-on. The checkout id is passed as a URL parameter to APIs related to purchase flows.
+A checkout represents the attributes of in-app purchase to be made on Rundl. Creating a checkout maybe required before making some in-app purchases. The checkout id is passed as a URL parameter to APIs related to purchase flows.
 
 ## The checkout object
 

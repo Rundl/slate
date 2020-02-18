@@ -11,50 +11,71 @@ Attribute | Type | Description
 `id` | integer | Unique identifier for the rundl.
 `name` | string | The name of the rundl.
 `description` | string | The description of the rundl.
-`host` | string | The host of the rundl. Gid if start, or entity when get.
-`files` | list | List of Rundl file identifiers. Stage files on auth user's account via the files API prior to sending the order.
-`participant_leads` | list | List of participant_lead objects
-`related_rundls` | list | List of related rundls
-`fields` | list | List of fields
+`video` | string | Ignore. Shouldn't be here.
 `service` | integer | Unique identifier of the type of service for the rundl.
 `service_name` | string | The name of the service
+`service_profile_banners` | list | Object containing sized image urls.
+`order` | integer | Unique identifier for an order, where the rundl was initiated from order flow.
+`model_id` | integer | Unique identifier for service model.
 `brand_color` | string | Hexadecimal colour value. If not set on the rundl, inherits from the service.
-`header_image_url` | string | Url for header image. If not set on the rundl, inherits from the service.
-`metadata` | object | Context information related to the order
-`state` | integer | Status of the order. See states reference.
-`state_metadata` | object | Status of the order. See approval states reference.
-`last_actioned_step` | object | 
-`last_actioned_step_state` | object | 
-`last_actioned_step_state_metadata` | object | 
-`percentage_complete` | integer | 	
+`profile_banners` | list | List of sized image urls.
+`metadata` | object | Context information related to the rundl
+`state` | object | Status of the order. See approval states reference.
+`last_actioned_step` | object | Object representing the step that was last updated.
+`last_actioned_step_state` | object | Object representing the status of the step that was last updated.
+`last_actioned_step_state_metadata` | object | Object with standard metadata relating to the last status update.
+`percentage_complete` | integer | 
+`reference` | string | Host's own reference for this rundl. Optionally overridden by each participant.
+`host` | string | The host of the rundl. Gid if start, or entity when get.
+`related_rundls` | list | List of related rundls
+`add_ons` | list | Expandable. List of add-ons enabled for this rundl.
+
+## Variant rundl object to support start rundl only
+
+Attribute | Type | Description
+--------- | ------- | -----------
+`name` | 
+`description` | 
+`host` | 
+`fields` | list | List of fields
+`subscriptions` | list | List of event subscriptions
+`related_rundls` | list | List of related rundl identifiers
+`files` | list | List of Rundl file identifiers. Stage files on auth user's account via the files API prior to sending the order.
+`participants` | list | List of participant objects
+
 
 ## Start a rundl
 
 ```shell
-curl -X POST https://stage-go.rundl.com/api/services/24415244/rundls?account=123456&checkout=30798521&payment_account=30736909 \ 
+curl -X POST https://stage-go.rundl.com/api/services/24415244/rundls?account=123456 \ 
   --header 'Content-Type: application/json' \
   --header 'Authorization: OAuth <User-Access-Token>' \
   --data '
       {
-      "rundl":{
-        "name":"Sale of property at 123 Baker St Caulfield Vic 3126",
-        "description":"Sale of property at 123 Baker St Caulfield Vic 3126",
-        "host":{
-          "id":2237816
-        },
-        "participant_leads":[
-          {
-            "context":1688402,
-            "roles":[
-              "Real Estate Agent"
-            ]
-          }
-        ],
-        "files":[
-          24415295
-        ]
+        "rundl":{
+          "name":"Sale of property at 123 Baker St Caulfield Vic 3126",
+          "description":"Sale of property at 123 Baker St Caulfield Vic 3126",
+          "host":{
+            "id":2237816
+          },
+          "participants":[
+            {
+              "contact":{
+                "first_name":"Demo",
+                "surname":"User",
+                "email":"demo_user@gmail.com",
+                "mobile":"+61411111111"
+              },
+              "roles":[
+                "Seller"
+              ]
+            }
+          ],
+          "files":[
+            42980832
+          ]
+        }
       }
-    }
   '
 ```
 
@@ -62,272 +83,35 @@ curl -X POST https://stage-go.rundl.com/api/services/24415244/rundls?account=123
 
 ```json
 {
-  "actions":null,
-  "id":24415298,
+  "id":42980836,
   "object":"rundl",
-  "add_ons":[
-
-  ],
-  "brand_color":"#53c876",
+  "version":null,
+  "version_latest":null,
+  "add_ons":null,
+  "brand_color":"#53C876",
   "description":"Sale of property at 123 Baker St Caulfield Vic 3126",
-  "header_image_url":null,
   "host":{
-    "account_id":1687398,
-    "content_image_url":null,
-    "description":null,
-    "global_type":42,
     "id":2237816,
-    "name":"Property Sales",
-    "parent":{
-      "account_id":1687398,
-      "content_image_url":null,
-      "description":null,
-      "global_type":36,
-      "id":1687390,
-      "name":"Property Agents (Demo)",
-      "parent":null,
-      "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-      "video_id":null
-    },
-    "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-    "video_id":null
+    ...
   },
-  "last_actioned_step":{
-    "account_id":null,
-    "content_image_url":null,
-    "description":"Thank you for appointing us to be your selling agents.\u000a\u000aWe look forward to achieving a great sale result for you!\u000aIf you haven't already signed the agreements please download and sign them then upload them using the blue pencil below right.",
-    "global_type":39,
-    "id":24415316,
-    "name":"Agency and marketing agreement",
-    "parent":null,
-    "profile_icon_url":null,
-    "video_id":null
-  },
-  "last_actioned_step_state":{
-    "EffectiveDate":"\/Date(1518004197881+1100)\/",
-    "Id":0,
-    "PreviousState":null,
-    "State":1
-  },
-  "last_actioned_step_state_metadata":{
-    "created_context":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":42,
-      "id":2237816,
-      "name":"Property Sales",
-      "parent":{
-        "account_id":null,
-        "content_image_url":null,
-        "description":null,
-        "global_type":36,
-        "id":1687390,
-        "name":"Property Agents (Demo)",
-        "parent":null,
-        "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-        "video_id":null
-      },
-      "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-      "video_id":null
-    },
-    "created_date":"\/Date(1518004197736+1100)\/",
-    "created_user":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":1688398,
-      "name":"Tyson Trennery",
-      "parent":null,
-      "profile_icon_url":"https:\/\/secure.gravatar.com\/avatar\/1199a56934177446b51650a29a24dd3a",
-      "video_id":null
-    },
-    "id":24415317,
-    "updated_context":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":42,
-      "id":2237816,
-      "name":"Property Sales",
-      "parent":{
-        "account_id":null,
-        "content_image_url":null,
-        "description":null,
-        "global_type":36,
-        "id":1687390,
-        "name":"Property Agents (Demo)",
-        "parent":null,
-        "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-        "video_id":null
-      },
-      "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-      "video_id":null
-    },
-    "updated_date":"\/Date(1518004198072+1100)\/",
-    "updated_user":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":1688398,
-      "name":"Tyson Trennery",
-      "parent":null,
-      "profile_icon_url":"https:\/\/secure.gravatar.com\/avatar\/1199a56934177446b51650a29a24dd3a",
-      "video_id":null
-    }
-  },
+  "last_actioned_step":null,
+  "last_actioned_step_state":null,
+  "last_actioned_step_state_metadata":null,
   "metadata":{
-    "created_context":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":42,
-      "id":2237816,
-      "name":"Property Sales",
-      "parent":{
-        "account_id":null,
-        "content_image_url":null,
-        "description":null,
-        "global_type":36,
-        "id":1687390,
-        "name":"Property Agents (Demo)",
-        "parent":null,
-        "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-        "video_id":null
-      },
-      "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-      "video_id":null
-    },
-    "created_date":"\/Date(1518004197000+1100)\/",
-    "created_user":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":1688398,
-      "name":"Tyson Trennery",
-      "parent":null,
-      "profile_icon_url":"https:\/\/secure.gravatar.com\/avatar\/1199a56934177446b51650a29a24dd3a",
-      "video_id":null
-    },
-    "id":24415298,
-    "updated_context":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":42,
-      "id":2237816,
-      "name":"Property Sales",
-      "parent":{
-        "account_id":null,
-        "content_image_url":null,
-        "description":null,
-        "global_type":36,
-        "id":1687390,
-        "name":"Property Agents (Demo)",
-        "parent":null,
-        "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-        "video_id":null
-      },
-      "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-      "video_id":null
-    },
-    "updated_date":"\/Date(1518004197000+1100)\/",
-    "updated_user":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":1688398,
-      "name":"Tyson Trennery",
-      "parent":null,
-      "profile_icon_url":"https:\/\/secure.gravatar.com\/avatar\/1199a56934177446b51650a29a24dd3a",
-      "video_id":null
-    }
+    ...
   },
+  "model_id":42979888,
   "name":"Sale of property at 123 Baker St Caulfield Vic 3126",
+  "order":null,
   "percentage_complete":0,
-  "related_rundls":[
-
-  ],
-  "service":24415244,
-  "service_name":"Real estate sale journey (Demo)",
+  "profile_banners":null,
+  "reference":null,
+  "related_rundls":[],
+  "service":42979887,
+  "service_name":"Selling your home with Property Agents",
+  "service_profile_banners":null,
   "state":{
-    "EffectiveDate":"\/Date(1518004197881+1100)\/",
-    "Id":0,
-    "PreviousState":null,
-    "State":2
-  },
-  "state_metadata":{
-    "created_context":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":42,
-      "id":2237816,
-      "name":"Property Sales",
-      "parent":{
-        "account_id":null,
-        "content_image_url":null,
-        "description":null,
-        "global_type":36,
-        "id":1687390,
-        "name":"Property Agents (Demo)",
-        "parent":null,
-        "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-        "video_id":null
-      },
-      "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-      "video_id":null
-    },
-    "created_date":"\/Date(1518004197350+1100)\/",
-    "created_user":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":1688398,
-      "name":"Tyson Trennery",
-      "parent":null,
-      "profile_icon_url":"https:\/\/secure.gravatar.com\/avatar\/1199a56934177446b51650a29a24dd3a",
-      "video_id":null
-    },
-    "id":24415299,
-    "updated_context":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":42,
-      "id":2237816,
-      "name":"Property Sales",
-      "parent":{
-        "account_id":null,
-        "content_image_url":null,
-        "description":null,
-        "global_type":36,
-        "id":1687390,
-        "name":"Property Agents (Demo)",
-        "parent":null,
-        "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-        "video_id":null
-      },
-      "profile_icon_url":"https:\/\/dev-media.rundl.co\/1687390\/24415219.png",
-      "video_id":null
-    },
-    "updated_date":"\/Date(1518004198159+1100)\/",
-    "updated_user":{
-      "account_id":null,
-      "content_image_url":null,
-      "description":null,
-      "global_type":43,
-      "id":1688398,
-      "name":"Tyson Trennery",
-      "parent":null,
-      "profile_icon_url":"https:\/\/secure.gravatar.com\/avatar\/1199a56934177446b51650a29a24dd3a",
-      "video_id":null
-    }
+    ...
   },
   "video":null
 }
@@ -337,15 +121,13 @@ Start a rundl based on a service. The user context starting the rundl must have 
 
 ### HTTP Request
 
-`POST	/services/{service_id}/rundls?account={account_id}&checkout={checkout}&payment_account={payment_account}`
+`POST	/services/{service_id}/rundls?account={account_id}`
 
 ### Query parameters
 
 Parameter | Description
 --------- | -----------
 account_id | The id of the selected account when starting the rundl
-checkout | The id of a checkout resource created for the purpose of the start rundl request
-payment_account | The id of the payment account for the rundl host. The host will be charged the relevant host fee.
 
 ### Path parameters
 
