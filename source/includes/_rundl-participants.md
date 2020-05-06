@@ -4,38 +4,39 @@
 
 Participants are the stakeholders in the business transaction that's getting delivered as a rundl. 
 
-Contexts (people, groups, or members and teams within groups) can participate in rundls. The rundl participants API supports adding existing contexts or inviting new users as participants in a rundl. 
+The participants API supports adding existing contexts (users, groups, or members and teams within groups) via the *context* attribute. Contexts can actively participate in rundls. For existing contexts, clients can implement the search API to find existing users/groups. For groups, clients can optionally query the Contexts API to find available member of team contexts for that group. 
 
-For existing contexts, clients can implement the search API to find existing users/groups. For groups, clients can optionally query the Contexts API to find available contexts for that group. 
+<aside class="notice">
+When adding an existing context, a context's settings determines if a full participant is added, or if a pending participant is added and a request is created for their approval. Where a request is created, the participant transitions from pending to full after accepting the request.
+</aside>
 
-Note: Upon adding an existing context, a context's settings determines if a full participant is added, or if a pending participant is added and a request is created for their approval. Where a request is created, the participant transitions from pending to full after accepting the request.
+The participants API also supports inviting a new user by supplying person details and an email address via the *contact* attribute. A *pending* user is made the participant context and an invitation to join Rundl is sent to the address. If the receiver accepts the invitation (by clicking the sign up link in the invitation email) the pending user and participant transitions to a full. 
 
-For new users, add participants by supplying person details including their email address. A pending user and participant is added and an invitation to join Rundl is sent to the address. Upon accepting the invitation (email receiver clicks link in email and signs up) the pending user and participant transitions to a full. 
-
-Virtual participants include a contact instead of a context and are not invited to participate. Virtual participants remain passive until they are 'upgraded' later to participate.
-
-<aside class="warning">When attempting to add a new user, if the supplied email is already a verified email for an existing user, the existing user is simply added/invited. Other person details will be ignored.</aside>
+The participants API also supports adding passive participant via the *contact* attribute and setting *category* to *virtual*.Virtual participants may be updated to full participants later by setting the *category* to *participant*.
 
 ## The participant object
 
-Attribute | Description
---------- | -----------
-`id` | The id of the participant.
-`categories` | List of strings to represent participant category. 
-`rundl` | The id of the rundl the participant is added to.
-`context` | The context that is participating. <br/>`Expandable`
-`contact` | The contact associated with the participant. <br/>`Expandable`
-`status` | Status of the participant. 
+Attribute | Type | Description
+--------- | ------- | -----------
+`id` | integer | The id of the participant.
+`categories` | string array | List of strings to represent participant category. <br/>Options: `participant`, `virtual`, `sender`, `receiver`, `referrer`
+`rundl` | integer | The id of the rundl the participant is added to.
+`context` | object | The context that is participating. <br/>`Expandable`
+`contact` | object | The contact associated with the participant. <br/>`Expandable`
+`status` | object | Status of the participant. 
 `created_date` | The date the participant was added.
-`roles` | Array of role names asigned to the participant.
-`is_host` | Flag to indicate if participant is the host.
-`observer` | Flag for making participant an observer.
-`message` | Message included in invitation email when adding a participant.
-`reference` | The participant's own reference for the rundl they're participating in.
+`roles` | string array | Array of role names asigned to the participant.
+`is_host` | boolean | Flag to indicate if participant is the host.
+`observer` | boolean | Flag for making participant an observer.
+`message` | string | Message included in invitation email when adding a participant.
+`reference` | string | The participant's own reference for the rundl they're participating in.
 
 ## Add a rundl participant
 
-Not the lack of category. No category implies a virtual participant.
+<aside class="notice">
+1. When attempting to add a new user via the *contact* attribute, if the supplied email is verified for an existing user, the existing user is simply added/invited.<br/>
+2. If no category is assigned, the new participant will default to the `virtual`.
+</aside>
 
 ```shell
 curl -X PUT https://stage-go.rundl.com/api/rundls/123456/participants?account=123456 \ 
@@ -227,3 +228,15 @@ Parameter | Description
 ### Request body
 
 See example request.
+
+
+## Remove a rundl participant
+
+To revoke a participant's access to a rundl remove the participant.
+
+```shell
+curl -X DELETE https://stage-go.rundl.com/api/rundls/123456/participants/25577359?account=123456 \ 
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: OAuth <User-Access-Token>' \
+  --data ''
+```

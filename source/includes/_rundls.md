@@ -138,3 +138,57 @@ service_id | The id of the service being started
 ### Request body
 
 See example request.
+
+
+## Update rundl status
+
+```shell
+curl -X POST https://stage-go.rundl.com/api/rundls/events?account=123456 \ 
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: OAuth <User-Access-Token>' \
+  --data '
+      {
+        "rundlId":43754936,
+        "theEvent":0,
+        "utcEffectiveDate":"/Date(1585811350941)/",
+        "silent":true
+      }
+  '
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id":42980836,
+  "object":"rundl",
+
+}
+```
+
+Update the status of a rundl. The user context must have permission to manage the rundls.
+
+The *rundlId* attribute is the unique identifier for the rundl to update.
+
+The *theEvent* attribute determines the new status.
+
+Value | Description
+--------- | -----------
+0 | Start a rundl. Can be used to re-start a completed or cancelled rundl.
+1 | Complete a rundl. This status means the process is finished.
+2 | Cancel a rundl. This status means the transaction is no longer valid.
+
+The *utcEffectiveDate* attribute overrides the current date-time value. Allows backdating of events where updates in Rundl happen after the real-world event happened.
+
+The *silent* attribute allows notifications for the event to be suppressed.
+
+### HTTP Request
+
+`POST	/rundls/events?account={account_id}`
+
+
+### Query parameters
+
+Parameter | Description
+--------- | -----------
+account_id | The id of the selected account when starting the rundl
