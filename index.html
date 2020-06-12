@@ -470,9 +470,11 @@ The Rundl API is currently in beta. We add product features regularly. Also, pat
 <h2 id='embedded-apps'>Embedded Apps</h2>
 <p>You can embed your custom HTML web app in an iframe container that&#39;s loaded in our web app. Your app can load in a sidebar within a rundl for presentation layer integration of your app. </p>
 
-<p>An embedded app gets unique OAuth credentials upon registration, and is configured with an HTTP end-point where your embedded app resides, and your public key. Contact <a href="mailto:support@rundl.com?subject=Register%20Embedded%20app">support@rundl.com</a> to register an embedded app. Registration is currently a manual process. Please provide the url for your app and your public key.</p>
+<p>An embedded app gets unique OAuth credentials upon registration, and is configured with an HTTP end-point where your embedded app resides, and your public key. Contact <a href="mailto:support@rundl.com?subject=Register%20Embedded%20app">support@rundl.com</a> to register an embedded app. Registration is currently a manual process. Please provide the url for your app.</p>
 
-<p>After we&#39;ve registered your app, you can link to it using the following internal link format in a rundl message, comment or step description:</p>
+<p>After we&#39;ve registered your app we will also provide a public key.</p>
+
+<p>You can link to your embedded app in our web app using the following internal link format in a rundl message, comment or step description:</p>
 
 <p><code>[Your embedded page link](!{rundl.id},addon_embeddedpage,your_app_id)</code></p>
 
@@ -498,7 +500,7 @@ The Rundl API is currently in beta. We add product features regularly. Also, pat
 
 <p><code>https://your-example-uri.com/some-path?token=&lt;JWT&gt;</code></p>
 
-<p>The JWT is signed and can be used to verify the authenticty of the request. The JWT also includes information that allows you to establish a session for a user when further interactions with the Rundl REST API are required. </p>
+<p>The JWT is signed and the public key we provide after registration can be used to verify the authenticty of the request. The JWT also includes information that allows you to establish a session for a user when further interactions with the Rundl REST API are required. </p>
 
 <p>Your end-point should return valid HTML that will be loaded in the iframe.</p>
 <h2 id='environments'>Environments</h2>
