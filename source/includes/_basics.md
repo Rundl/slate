@@ -20,9 +20,11 @@ Rundl will trigger sending events in 10 second intervals.
 
 You can embed your custom HTML web app in an iframe container that's loaded in our web app. Your app can load in a sidebar within a rundl for presentation layer integration of your app. 
 
-An embedded app gets unique OAuth credentials upon registration, and is configured with an HTTP end-point where your embedded app resides, and your public key. Contact [support@rundl.com](mailto:support@rundl.com?subject=Register Embedded app) to register an embedded app. Registration is currently a manual process. Please provide the url for your app and your public key.
+An embedded app gets unique OAuth credentials upon registration, and is configured with an HTTP end-point where your embedded app resides, and your public key. Contact [support@rundl.com](mailto:support@rundl.com?subject=Register Embedded app) to register an embedded app. Registration is currently a manual process. Please provide the url for your app.
 
-After we've registered your app, you can link to it using the following internal link format in a rundl message, comment or step description:
+After we've registered your app we will also provide a public key.
+
+You can link to your embedded app in our web app using the following internal link format in a rundl message, comment or step description:
 
 `[Your embedded page link](!{rundl.id},addon_embeddedpage,your_app_id)`
 
@@ -49,7 +51,7 @@ When a rundl participant clicks the link, our web app will send a GET request to
 
 `https://your-example-uri.com/some-path?token=<JWT>`
 
-The JWT is signed and can be used to verify the authenticty of the request. The JWT also includes information that allows you to establish a session for a user when further interactions with the Rundl REST API are required. 
+The JWT is signed and the public key we provide after registration can be used to verify the authenticty of the request. The JWT also includes information that allows you to establish a session for a user when further interactions with the Rundl REST API are required. 
 
 Your end-point should return valid HTML that will be loaded in the iframe.
 
